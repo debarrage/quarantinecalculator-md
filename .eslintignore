@@ -1,0 +1,4 @@
+jest.config.js
+*.d.ts
+src/assets
+src/react-app-env.d.ts
