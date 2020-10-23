@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import * as App from "./components/App";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { store } from "./store";
 
 const CleaningApp: React.FC = () => (
     <Provider store={store}>
-        blabla
+        <App.Scaffold/>
     </Provider>
 );
 

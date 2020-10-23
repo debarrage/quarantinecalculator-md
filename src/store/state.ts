@@ -1,4 +1,4 @@
-import { IInitState } from "../reducers/init";
+import { IInitState } from "./reducers/init";
 
 /**
  * Main application state. All substates are defined as types with the 

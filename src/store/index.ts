@@ -1,5 +1,5 @@
 import { compose, createStore, StoreEnhancer } from "redux";
-import { rootReducer } from "../reducers";
+import { rootReducer } from "./reducers";
 
 // Declare global type for the redux devtools
 declare global {
