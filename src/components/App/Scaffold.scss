@@ -1,1 +1,9 @@
+@import "./Reset.scss";
 
+html {
+    font-family: 'Assistant', sans-serif;
+}
+
+.app {
+    min-height: 100vh;
+}

@@ -1,3 +1,4 @@
+import { IFlowState } from "./reducers/flow";
 import { IInitState } from "./reducers/init";
 
 /**
@@ -6,4 +7,5 @@ import { IInitState } from "./reducers/init";
  */
 export interface IApplicationState {
     init: IInitState,
+    flow: IFlowState,
 }

@@ -1,9 +1,8 @@
 import { createAction } from "@reduxjs/toolkit";
+import { createActionName } from "./util";
 
-enum Actions {
-    INIT = "[Application] INIT",
-    INIT_DONE = "[Application] INIT_DONE",
-}
+const actionGroup = "application";
+const actionName = createActionName(actionGroup);
 
-export const initAction = createAction(Actions.INIT);
-export const initDoneAction = createAction(Actions.INIT_DONE);
+export const initAction = createAction(actionName("init"));
+export const initDoneAction = createAction(actionName("init done"));
