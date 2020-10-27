@@ -1,10 +1,22 @@
+import classNames from "classnames";
 import React from "react";
 import { QuestionProps } from ".";
 import { IQuestion } from "../../core/domain";
+import * as Buttons from "./Button";
 
-export const Wrapper: React.FC<{ className?: string }> = (props) => {
+export const Wrapper: React.FC<QuestionProps<IQuestion> & { className?: string }> = (props) => {
+
+    const className = classNames(
+        "question",
+        `question__${props.question.type}`,
+        `question__${props.question?.id}`,
+        props.className
+    );
+
+    const id = `question__${props.question?.id}`;
+
     return (
-        <div className={`questions question ${props.className}`}>
+        <div id={id} className={className}>
             <div className="question__wrapper">
                 {props.children}
             </div>
@@ -35,6 +47,16 @@ export const Footer: React.FC = (props) => {
         </div>
     )
 };
+
+export const ButtonFooter: React.FC = (props) => {
+    return (
+        <Footer>
+            <Buttons.Previous/>
+            {props.children}
+            <Buttons.Reset/>
+        </Footer>
+    );
+}
 
 export const NothingLoaded: React.FC = () => {
     return (

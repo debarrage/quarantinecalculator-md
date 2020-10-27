@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import { QuestionProps } from ".";
 import { IDaysAgoQuestion } from "../../core/domain";
 import * as Buttons from "./Button";
-import { useDispatchNextQuestion } from "./hooks/useNextQuestion";
+import { useNextQuestions } from "./hooks/useNextQuestion";
 import * as Scaffold from "./Scaffold";
 
 export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
     
     const [result, setResult] = useState<number>(0);
 
-    const dispatcher = useDispatchNextQuestion();
+    const dispatcher = useNextQuestions();
     const next = () => dispatcher(props.question.targets.next, result);
     
     const min = () => {
@@ -23,7 +23,7 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
     }
 
     return (
-        <Scaffold.Wrapper className="question__daysago daysago">
+        <Scaffold.Wrapper className="daysago" {...props}>
             <Scaffold.Title {...props}/>
             <Scaffold.Body>
                 <div className="daysago__min" onClick={min}>

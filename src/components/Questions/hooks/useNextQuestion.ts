@@ -4,7 +4,7 @@ import { nextQuestionAction } from "../../../store/actions";
 
 type NextQuestion = (id: QuestionId, result?: QuestionResultTypes) => void;
 
-export function useDispatchNextQuestion(): NextQuestion {
+export function useNextQuestions(): NextQuestion {
     const dispatch = useDispatch();
     return (id, result) => {
         dispatch(nextQuestionAction({ id, result }));

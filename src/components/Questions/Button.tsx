@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { previousQuestionAction } from "../../store/actions";
+import { usePreviousQuestion } from "./hooks/usePreviousQuestion";
+import { useReset } from "./hooks/useReset";
 
 type ButtonHandler = () =>  void;
 type ButtonProps = { handler: ButtonHandler };
@@ -17,10 +17,7 @@ export const Generic: React.FC<GenericProps> = (props) => {
 
 export const Previous: React.FC = () => {
 
-    const dispatch = useDispatch();
-    const previous = () => {
-        dispatch(previousQuestionAction());
-    }
+    const previous = usePreviousQuestion();
 
     return (
         <Generic handler={previous} name="previous">
@@ -34,3 +31,13 @@ export const Next: React.FC<ButtonProps> = (props) => {
             <span className="button__text text">Volgende</span>
         </Generic>);
 }
+
+export const Reset: React.FC = () => {
+
+    const reset = useReset();
+
+    return (
+        <Generic handler={reset} name="reset">
+            <span className="button__text text">Opnieuw</span>
+        </Generic>);
+};

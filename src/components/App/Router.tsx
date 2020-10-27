@@ -1,6 +1,7 @@
 import React from "react";
-import { isDayQuestion, isNextQuestion, isYesNoQuestion } from "../../core/domain";
+import { isDayQuestion, isFinal, isNextQuestion, isYesNoQuestion } from "../../core/domain";
 import { DaysAgo } from "../Questions/DaysAgo";
+import { Final } from "../Questions/Final";
 import { useCurrentQuestion } from "../Questions/hooks/useCurrentQuestion";
 import { Next } from "../Questions/Next";
 import * as Scaffold from "../Questions/Scaffold";
@@ -21,6 +22,10 @@ export const Router: React.FC = () => {
 
         if(isDayQuestion(question)) {
             return <DaysAgo question={question} />;
+        }
+
+        if(isFinal(question)) {
+            return <Final question={question} />;
         }
     }
 
