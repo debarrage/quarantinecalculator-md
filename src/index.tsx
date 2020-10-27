@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import * as App from "./components/App";
+import * as Questions from "./components/Questions";
 import * as serviceWorker from "./serviceWorker";
 import { store } from "./store";
 
 const QuarantineCalculator: React.FC = () => (
     <Provider store={store}>
-        <App.Scaffold/>
+        <App.Scaffold>
+            <Questions.Router/>
+        </App.Scaffold>
     </Provider>
 );
 

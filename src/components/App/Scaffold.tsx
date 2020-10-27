@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { initDoneAction } from "../../store/actions";
 import "./Scaffold.scss";
 
-export const Scaffold: React.FC = () => {
+export const Scaffold: React.FC = (props) => {
     
     const dispatch = useDispatch();
 
@@ -13,7 +13,7 @@ export const Scaffold: React.FC = () => {
 
     return (
         <div className="app">
-            blabla
+            {props.children}
         </div>
     )
 };

@@ -1,40 +1,49 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { Question } from "../../core/domain";
+import { getInitialQuestion, questions } from "../../core";
+import { IQuestion, IQuestionStackItem } from "../../core/domain";
 import { nextQuestionAction, previousQuestionAction, resetAction } from "../actions";
 
 export interface IFlowState {
-    current?: Question;
-    stack: Array<Question>;
+    current?: IQuestion;
+    stack: Array<IQuestionStackItem>;
 }
 
 const INITIAL_STATE: IFlowState = {
+    current: getInitialQuestion(),
     stack: [],
 }
 
 export const flow = createReducer(INITIAL_STATE, (builder) => {
     builder.addCase(resetAction, () => INITIAL_STATE);
     builder.addCase(nextQuestionAction, (state, action) => {
-        if(state.current) {
+
+        const { id, result } = action.payload;
+        const { current } = state;
+
+        if(current) {
+
+            const nextQuestion = questions.find(q => q.id === id);
+
             return {
-                current: action.payload,
-                stack: [...state.stack, state.current]
+                current: nextQuestion,
+                stack: [...state.stack, {
+                    type: current.type,
+                    result,
+                    question: current,
+                }],
             }
         }
-
-        return {
-            current: action.payload,
-            ...state
-        };
+        return state;
     });
-    builder.addCase(previousQuestionAction, (state, _) => {
-        if(state.stack.length > 0) {
-            const current = state.stack.pop();
+    builder.addCase(previousQuestionAction, (state) => {
+        const { stack } = state;
+        const previous = stack.slice(-1)[0];
+        if(previous) {
             return {
-                current,
-                stack: [...state.stack],
+                current: previous.question,
+                stack: stack.slice(0,-1),
             }
         }
-
         return state;
     })
 });
