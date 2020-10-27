@@ -1,4 +1,4 @@
-import { IFinalQuestion, INextQuestion, IYesNoQuestion, Question, QuestionId } from "./domain";
+import { IDaysAgoQuestion, IFinalQuestion, INextQuestion, IYesNoQuestion, Question, QuestionId } from "./domain";
 
 export class QuestionBuilder {
 
@@ -29,6 +29,20 @@ export class QuestionBuilder {
             return {
                 id: this.question.id,
                 type: "next",
+                title: this.question.title,
+                targets: {
+                    next,
+                },
+            }
+        }
+        throw new Error("Invalid settings, id and title should be set");
+    }
+
+    withDaysAgo(next: QuestionId): IDaysAgoQuestion {
+        if(this.question.id && this.question.title) {
+            return {
+                id: this.question.id,
+                type: "day",
                 title: this.question.title,
                 targets: {
                     next,

@@ -25,7 +25,7 @@ export interface IYesNoQuestion extends IQuestion {
     };
 }
 
-export interface IDayQuestion extends IQuestion {
+export interface IDaysAgoQuestion extends IQuestion {
     type: "day";
     targets: {
         next: QuestionId;
@@ -36,4 +36,4 @@ export interface IFinalQuestion extends IQuestion {
     type: "final";
 }
 
-export type Question = IYesNoQuestion | IDayQuestion | INextQuestion | IFinalQuestion;
+export type Question = IYesNoQuestion | IDaysAgoQuestion | INextQuestion | IFinalQuestion;

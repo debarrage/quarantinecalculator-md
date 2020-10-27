@@ -11,4 +11,5 @@ export const questions: Array<Question> = [
     builder("r1").withTitle("Heeft de patient in de afgelopen 2 maanden een positieve test (PCR) gehad?").withYesNo("f1", "r2"),
     builder("f1").withTitle("Geen quarantaine nodig").final(),
     builder("r2").withTitle("Is het een huisgenoot?").withYesNo("r2a", "r2b"),
+    builder("r2a").withTitle("Sinds wanneer is de huisgenoot symptomatisch?").withDaysAgo("r3")
 ];

@@ -3,7 +3,7 @@
 // export type NextResult = void;
 // export type DayResult = number;
 
-import { IDayQuestion, INextQuestion, IQuestion, IYesNoQuestion } from "./questions";
+import { IDaysAgoQuestion, INextQuestion, IQuestion, IYesNoQuestion } from "./questions";
 
 
 export interface IQuestionResult<T extends IQuestion, R> {
@@ -11,11 +11,11 @@ export interface IQuestionResult<T extends IQuestion, R> {
     result?: R;
 }
 
-export type DayResult = IQuestionResult<IDayQuestion, number>;
+export type DaysAgoResult = IQuestionResult<IDaysAgoQuestion, number>;
 export type NextResult = IQuestionResult<INextQuestion, void>;
 export type YesNoResult = IQuestionResult<IYesNoQuestion, boolean>;
 
-export type QuestionResultTypes = (YesNoResult | NextResult | DayResult)["result"]
+export type QuestionResultTypes = (YesNoResult | NextResult | DaysAgoResult)["result"]
 
 export interface IQuestionStackItem extends IQuestionResult<IQuestion, QuestionResultTypes> {
     question: IQuestion;

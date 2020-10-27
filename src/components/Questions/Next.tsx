@@ -15,9 +15,7 @@ export const Next: React.FC<QuestionProps<INextQuestion>> = (props) => {
             <Scaffold.Title {...props}/>
             <Scaffold.Footer>
                 <Buttons.Previous/>
-                <Buttons.Generic handler={next} name="next">
-                    Volgende
-                </Buttons.Generic>
+                <Buttons.Next handler={next} />
             </Scaffold.Footer>
         </Scaffold.Wrapper>
     );

@@ -1,11 +1,11 @@
 import { INextQuestion, IYesNoQuestion, Question } from ".";
-import { IQuestion } from "./questions";
+import { IDaysAgoQuestion, IQuestion } from "./questions";
 
 export function isNextQuestion(q: IQuestion): q is INextQuestion {
     return q.type === "next";
 }
 
-export function isDayQuestion(q: IQuestion): q is INextQuestion {
+export function isDayQuestion(q: IQuestion): q is IDaysAgoQuestion {
     return q.type === "day";
 }
 

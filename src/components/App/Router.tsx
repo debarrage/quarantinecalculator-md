@@ -1,5 +1,6 @@
 import React from "react";
-import { isNextQuestion, isYesNoQuestion } from "../../core/domain";
+import { isDayQuestion, isNextQuestion, isYesNoQuestion } from "../../core/domain";
+import { DaysAgo } from "../Questions/DaysAgo";
 import { useCurrentQuestion } from "../Questions/hooks/useCurrentQuestion";
 import { Next } from "../Questions/Next";
 import * as Scaffold from "../Questions/Scaffold";
@@ -16,6 +17,10 @@ export const Router: React.FC = () => {
 
         if(isYesNoQuestion(question)) {
             return <YesNo question={question} />;
+        }
+
+        if(isDayQuestion(question)) {
+            return <DaysAgo question={question} />;
         }
     }
 
