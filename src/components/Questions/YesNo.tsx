@@ -12,7 +12,7 @@ export const YesNo: React.FC<QuestionProps<IYesNoQuestion>> = (props) => {
     const no = () => dispatcher(props.question.targets.no, false);
 
     return (
-        <Scaffold.Wrapper className="question_next">
+        <Scaffold.Wrapper className="question__yesno">
             <Scaffold.Title {...props}/>
             <Scaffold.Footer>
                 <Buttons.Previous/>

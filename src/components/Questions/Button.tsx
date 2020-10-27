@@ -9,7 +9,7 @@ type GenericProps = ButtonProps & { name?: string };
 export const Generic: React.FC<GenericProps> = (props) => {
     const className = props.name ? `buttons_${props.name}` : "";
     return (
-        <div className={`buttons_button ${className}`} onClick={props.handler}>
+        <div className={`buttons__button ${className}`} onClick={props.handler}>
             {props.children}
         </div>
     );

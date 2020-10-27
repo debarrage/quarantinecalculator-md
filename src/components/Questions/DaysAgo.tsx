@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { QuestionProps } from ".";
@@ -22,13 +23,13 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
     }
 
     return (
-        <Scaffold.Wrapper className="question_daysago">
+        <Scaffold.Wrapper className="question__daysago daysago">
             <Scaffold.Title {...props}/>
             <Scaffold.Body>
-                <div className="button__min" onClick={min}>
+                <div className="daysago__min" onClick={min}>
                     <span className="button__text text">&lt;</span>
                 </div>
-                <div className="button__value daysago">
+                <div className="button__value daysago__value">
                     <span className="daysago__title text">
                         Aantal dagen geleden:
                     </span>
@@ -39,7 +40,7 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
                         {dayjs().add(result, "day").format("DD-MM-YYYY")}
                     </span>
                 </div>
-                <div className="button__plus" onClick={plus}>
+                <div className={classNames("daysago__plus", { "button--disabled": result === 0 })} onClick={plus}>
                     <span className="button__text text">&gt;</span>
                 </div>
             </Scaffold.Body>

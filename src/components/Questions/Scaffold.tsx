@@ -14,7 +14,7 @@ export const Wrapper: React.FC<{ className?: string }> = (props) => {
 
 export const Title: React.FC<QuestionProps<IQuestion>> = (props) => {
     return (
-        <div className="question__title question_element">
+        <div className="question__title question__element">
             <h3 className="title__text">{props.question.title}</h3>
         </div>
     )
@@ -22,7 +22,7 @@ export const Title: React.FC<QuestionProps<IQuestion>> = (props) => {
 
 export const Body: React.FC = (props) => {
     return (
-        <div className="question__body question_element">
+        <div className="question__body question__element">
             {props.children}
         </div>
     )
@@ -30,7 +30,7 @@ export const Body: React.FC = (props) => {
 
 export const Footer: React.FC = (props) => {
     return (
-        <div className="question__footer question_element">
+        <div className="question__footer question__element">
             {props.children}
         </div>
     )

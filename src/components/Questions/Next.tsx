@@ -11,7 +11,7 @@ export const Next: React.FC<QuestionProps<INextQuestion>> = (props) => {
     const next = () => dispatcher(props.question.targets.next);
 
     return (
-        <Scaffold.Wrapper className="question_next">
+        <Scaffold.Wrapper className="question__next">
             <Scaffold.Title {...props}/>
             <Scaffold.Footer>
                 <Buttons.Previous/>
