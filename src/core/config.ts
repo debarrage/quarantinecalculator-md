@@ -13,7 +13,7 @@ export const questions: Questions= [
     builder("f1").withTitle("Geen quarantaine nodig").final(),
     builder("r2").withTitle("Is het een huisgenoot?").withYesNo("r2a", "r2b"),
     builder("r2a").withTitle("Sinds wanneer is de huisgenoot symptomatisch?").withDaysAgo("r3"),
-    builder("r2b").withTitle("Wanneer is het laatste risicocontact geweest?").withDaysAgo("r4"),
+    builder("r2b").withTitle("Wanneer is het laatste risicocontact geweest?").withDaysAgo("f2"),
     builder("r3").withTitle("Is het mogelijk binnenshuis quarantaine te creëeren?").withYesNo("r4", "f2"),
     builder("r4").withTitle("Vanaf welke datum?").withDaysAgo("f2"),
     builder("f2").withTitle("Aantal dagen quarantaine").final(),
@@ -27,7 +27,8 @@ export const questions: Questions= [
     builder("s5").withTitle("Was de test positief?").withYesNo("f3", "s6"),
     builder("f3").withTitle("Aantal dagen quarantaine").final(),
     builder("s6").withTitle("Heeft men een ook een hoog risico contact gehad?").withYesNo("r2", "f4"),
-    builder("f4").withTitle("Quarantaine beëindigd").final()
+    builder("f4").withTitle("Quarantaine beëindigd").final(),
+    builder("f5").withTitle("Quarantaine tot het resultaat gekend is").final()
 ];
 
 export function isQuestionId(id: string): id is QuestionId {
