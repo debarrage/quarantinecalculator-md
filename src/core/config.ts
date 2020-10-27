@@ -19,12 +19,13 @@ export const questions: Questions= [
     builder("f2").withTitle("Aantal dagen quarantaine").final(),
 
     // S-side of the flow chart
-    builder("s1").withTitle("Wanneer zijn de klachten begonnen?").withNext("s2"),
+    builder("s1").withTitle("Wanneer zijn de klachten begonnen?").withDaysAgo("s2"),
     builder("s2").withTitle("Is er een test gedaan?").withYesNo("s3a", "s3b"),
     builder("s3a").withTitle("Wanneer").withDaysAgo("s4"),
     builder("s3b").withTitle("Test indien van toepassing").withNext("f5"),
     builder("s4").withTitle("Is de uitkomst reeds gekend?").withYesNo("s5", "f5"),
     builder("s5").withTitle("Was de test positief?").withYesNo("f3", "s6"),
+    builder("f3").withTitle("Aantal dagen quarantaine").final(),
     builder("s6").withTitle("Heeft men een ook een hoog risico contact gehad?").withYesNo("r2", "f4"),
     builder("f4").withTitle("Quarantaine beëindigd").final()
 ];

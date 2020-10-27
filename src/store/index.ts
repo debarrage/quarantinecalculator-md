@@ -1,5 +1,6 @@
-import { compose, createStore, StoreEnhancer } from "redux";
+import { applyMiddleware, compose, createStore, StoreEnhancer } from "redux";
 import { rootReducer } from "./reducers";
+import { calculator } from "./reducers/calculator";
 
 // Declare global type for the redux devtools
 declare global {
@@ -11,5 +12,5 @@ declare global {
 // Central store
 export const store = createStore(
     rootReducer,
-    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)()
+    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(applyMiddleware(calculator))
 );
