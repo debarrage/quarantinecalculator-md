@@ -1,5 +1,5 @@
 import { IQuestion } from "../../core/domain";
-export * from "./Router";
+export * from "../App/Router";
 
 export type QuestionProps<T extends IQuestion> = {
     question: T;
