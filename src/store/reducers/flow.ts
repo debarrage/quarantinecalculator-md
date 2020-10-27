@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { getInitialQuestion, questions } from "../../core";
+import { findInitialQuestion, findQuestion } from "../../core";
 import { IQuestion, IQuestionStackItem } from "../../core/domain";
 import { nextQuestionAction, previousQuestionAction, resetAction } from "../actions";
 
@@ -9,7 +9,7 @@ export interface IFlowState {
 }
 
 const INITIAL_STATE: IFlowState = {
-    current: getInitialQuestion(),
+    current: findInitialQuestion(),
     stack: [],
 }
 
@@ -22,7 +22,7 @@ export const flow = createReducer(INITIAL_STATE, (builder) => {
 
         if(current) {
 
-            const nextQuestion = questions.find(q => q.id === id);
+            const nextQuestion = findQuestion(id);
 
             return {
                 current: nextQuestion,
