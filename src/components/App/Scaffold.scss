@@ -1,9 +1,17 @@
-@import "./Reset.scss";
+@import "./_reset.scss";
+@import "./_colors.scss";
 
 html {
-    font-family: 'Assistant', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100 !important;
+    color: $font-color;
+    
 }
 
 .app {
     min-height: 100vh;
+    position:relative;
+    overflow: hidden;
+    background: $dark-red;
+    background: linear-gradient(150deg, rgba($dark-red,1) 0%, rgba($red,1) 50%, rgba($orange,1) 100%);
 }

@@ -3,6 +3,8 @@ import React from "react";
 import { QuestionProps } from ".";
 import { IQuestion } from "../../core/domain";
 import * as Buttons from "./Button";
+import "./Scaffold.scss";
+
 
 export const Wrapper: React.FC<QuestionProps<IQuestion> & { className?: string }> = (props) => {
 
@@ -27,7 +29,7 @@ export const Wrapper: React.FC<QuestionProps<IQuestion> & { className?: string }
 export const Title: React.FC<QuestionProps<IQuestion>> = (props) => {
     return (
         <div className="question__title question__element">
-            <h3 className="title__text">{props.question.title}</h3>
+            <h3 className="title__text animate__animated animate__fadeInRight">{props.question.title}</h3>
         </div>
     )
 };
@@ -42,7 +44,7 @@ export const Body: React.FC = (props) => {
 
 export const Footer: React.FC = (props) => {
     return (
-        <div className="question__footer question__element">
+        <div className="question__footer buttons question__element">
             {props.children}
         </div>
     )
@@ -51,8 +53,10 @@ export const Footer: React.FC = (props) => {
 export const ButtonFooter: React.FC = (props) => {
     return (
         <Footer>
-            <Buttons.Previous/>
-            {props.children}
+            <div className="buttons__main">
+                <Buttons.Previous/>
+                {props.children}
+            </div>
             <Buttons.Reset/>
         </Footer>
     );
