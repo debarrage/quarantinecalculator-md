@@ -1,17 +1,24 @@
 import { ChevronLeftIcon, ChevronRightIcon, SyncIcon } from "@primer/octicons-react";
+import classNames from "classnames";
 import React from "react";
 import "./Button.scss";
+import { useIsEmptyStack } from "./hooks/useIsEmptyStack";
 import { usePreviousQuestion } from "./hooks/usePreviousQuestion";
 import { useReset } from "./hooks/useReset";
 
 type ButtonHandler = () =>  void;
-type ButtonProps = { handler: ButtonHandler };
+type ButtonProps = { handler: ButtonHandler, className?: string, disabled?: boolean };
 type GenericProps = ButtonProps & { name?: string };
 
 export const Generic: React.FC<GenericProps> = (props) => {
-    const className = props.name ? `buttons__${props.name}` : "";
+    const className = classNames(
+        "buttons__button",
+        { "buttons__button--disabled": props.disabled },
+        props.name && `buttons__${props.name}`, 
+        props.className);
+        
     return (
-        <div className={`buttons__button ${className}`} onClick={props.handler}>
+        <div className={className} onClick={props.handler}>
             {props.children}
         </div>
     );
@@ -20,9 +27,10 @@ export const Generic: React.FC<GenericProps> = (props) => {
 export const Previous: React.FC = () => {
 
     const previous = usePreviousQuestion();
+    const isEmptyStack = useIsEmptyStack();
 
     return (
-        <Generic handler={previous} name="previous">
+        <Generic handler={previous} name="previous" disabled={isEmptyStack}>
             <span className="button__text text">
                 <ChevronLeftIcon size="large" verticalAlign="middle" />
                 Vorige

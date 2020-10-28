@@ -5,8 +5,8 @@ export const INITIAL_QUESTION_ID: QuestionId = "0";
 
 export const questions: Questions= [
     // Introduction and main question
-    builder(INITIAL_QUESTION_ID).withTitle("Start de Covid Calculator.").withNext("1"),
-    builder("1").withTitle("Is er een hoog risico conrtact geweest met een bevestigd covid geval?").withYesNo("r1", "s1"),
+    builder(INITIAL_QUESTION_ID).withTitle("Start de Covid Quarantaine Calculator.").withNext("1"),
+    builder("1").withTitle("Is er een hoog risico contact geweest met een bevestigd covid geval?").withYesNo("r1", "s1"),
 
     // R-side of the flow chart
     builder("r1").withTitle("Heeft de patient in de afgelopen 2 maanden een positieve test (PCR) gehad?").withYesNo("f1", "r2"),

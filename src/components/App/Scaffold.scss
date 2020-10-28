@@ -9,8 +9,11 @@ html {
 }
 
 .app {
-    min-height: 100vh;
-    position:relative;
+    position:fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
     overflow: hidden;
     background: $dark-red;
     background: linear-gradient(150deg, rgba($dark-red,1) 0%, rgba($red,1) 50%, rgba($orange,1) 100%);

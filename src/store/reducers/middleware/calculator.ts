@@ -1,9 +1,9 @@
 import { Action, Dispatch, Middleware } from "redux";
-import { findQuestion, isFinal } from "../../core";
-import { Calculator } from "../../core/calculator";
-import { nextQuestionAction } from "../actions";
-import { setCalculatorResultAction } from "../actions/calculator";
-import { IApplicationState } from "../state";
+import { findQuestion, isFinal } from "../../../core";
+import { Calculator } from "../../../core/calculator";
+import { nextQuestionAction } from "../../actions";
+import { setCalculatorResultAction } from "../../actions/calculator";
+import { IApplicationState } from "../../state";
 
 type CalculatorMiddleware = Middleware<unknown, IApplicationState, Dispatch>;
 
@@ -16,6 +16,7 @@ export const calculator: CalculatorMiddleware = (store) => (next) => (action: Ac
     next(action);
     
     if(isNextQuestionAction(action)) {
+        // Instantiate calculator if it is final
         const question = findQuestion(action.payload.id);
         if(question && isFinal(question)) {
             const { stack } = store.getState().flow;
