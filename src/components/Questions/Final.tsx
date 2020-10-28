@@ -5,16 +5,16 @@ import { QuestionProps } from ".";
 import { IFinalQuestion } from "../../core/domain";
 import { IApplicationState } from "../../store/state";
 import * as Buttons from "./Button";
-import * as Scaffold from "./Scaffold";
+import * as Question from "./Question";
 
 export const Final: React.FC<QuestionProps<IFinalQuestion>> = (props) => {
 
     const quarantine = useSelector<IApplicationState, number>(state => state.quarantine.days);
 
     return (
-        <Scaffold.Wrapper {...props} className="quarantine" >
-            <Scaffold.Title {...props}/>
-            <Scaffold.Body>
+        <Question.Wrapper {...props} className="quarantine" >
+            <Question.Title {...props}/>
+            <Question.Body>
                 {
                     (quarantine > 0) && (
                         <div className="quarantine__result">
@@ -28,10 +28,10 @@ export const Final: React.FC<QuestionProps<IFinalQuestion>> = (props) => {
                         </div>
                     )
                 }
-            </Scaffold.Body>
-            <Scaffold.Footer>
+            </Question.Body>
+            <Question.Footer>
                 <Buttons.Reset/>
-            </Scaffold.Footer>
-        </Scaffold.Wrapper>
+            </Question.Footer>
+        </Question.Wrapper>
     );
 }

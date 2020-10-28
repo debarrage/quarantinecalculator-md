@@ -4,7 +4,7 @@ import { DaysAgo } from "../Questions/DaysAgo";
 import { Final } from "../Questions/Final";
 import { useCurrentQuestion } from "../Questions/hooks/useCurrentQuestion";
 import { Next } from "../Questions/Next";
-import * as Scaffold from "../Questions/Scaffold";
+import * as Scaffold from "../Questions/Question";
 import { YesNo } from "../Questions/YesNo";
 
 export const Router: React.FC = () => {

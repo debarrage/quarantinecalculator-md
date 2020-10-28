@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon, SyncIcon } from "@primer/octicons-react";
 import React from "react";
+import "./Button.scss";
 import { usePreviousQuestion } from "./hooks/usePreviousQuestion";
 import { useReset } from "./hooks/useReset";
 

@@ -3,10 +3,12 @@ import React from "react";
 import { QuestionProps } from ".";
 import { IQuestion } from "../../core/domain";
 import * as Buttons from "./Button";
-import "./Scaffold.scss";
+import "./Question.scss";
 
+type ClassNameProps = { className?: string };
+type DefaultProps = QuestionProps<IQuestion>;
 
-export const Wrapper: React.FC<QuestionProps<IQuestion> & { className?: string }> = (props) => {
+export const Wrapper: React.FC<DefaultProps & ClassNameProps> = (props) => {
 
     const className = classNames(
         "question",
@@ -26,7 +28,7 @@ export const Wrapper: React.FC<QuestionProps<IQuestion> & { className?: string }
     )
 };
 
-export const Title: React.FC<QuestionProps<IQuestion>> = (props) => {
+export const Title: React.FC<DefaultProps> = (props) => {
     return (
         <div className="question__title question__element">
             <h3 className="title__text animate__animated animate__fadeInRight">{props.question.title}</h3>
@@ -34,9 +36,9 @@ export const Title: React.FC<QuestionProps<IQuestion>> = (props) => {
     )
 };
 
-export const Body: React.FC = (props) => {
+export const Body: React.FC<ClassNameProps> = (props) => {
     return (
-        <div className="question__body question__element">
+        <div className={classNames("question__body", "question__element", props.className)}>
             {props.children}
         </div>
     )

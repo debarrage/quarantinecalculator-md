@@ -1,11 +1,13 @@
+import { ChevronDownIcon, ChevronUpIcon } from "@primer/octicons-react";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { QuestionProps } from ".";
 import { IDaysAgoQuestion } from "../../core/domain";
 import * as Buttons from "./Button";
+import "./DaysAgo.scss";
 import { useNextQuestions } from "./hooks/useNextQuestion";
-import * as Scaffold from "./Scaffold";
+import * as Question from "./Question";
 
 export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
     
@@ -23,31 +25,34 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
     }
 
     return (
-        <Scaffold.Wrapper className="daysago" {...props}>
-            <Scaffold.Title {...props}/>
-            <Scaffold.Body>
+        <Question.Wrapper {...props}>
+            <Question.Title {...props}/>
+            <Question.Body className="daysago" >
                 <div className="daysago__min" onClick={min}>
-                    <span className="button__text text">&lt;</span>
+                    <span className="button__text text">
+                        <ChevronDownIcon size="large"/>
+                    </span>
                 </div>
                 <div className="button__value daysago__value">
                     <span className="daysago__title text">
                         Aantal dagen geleden:
                     </span>
                     <span className="daysago__result">
-                        {result}
+                        {Math.abs(result)}
                     </span>
                     <span className="daysago__dateresult">
                         {dayjs().add(result, "day").format("DD-MM-YYYY")}
                     </span>
                 </div>
                 <div className={classNames("daysago__plus", { "button--disabled": result === 0 })} onClick={plus}>
-                    <span className="button__text text">&gt;</span>
+                    <span className="button__text text">
+                        <ChevronUpIcon size="large" />
+                    </span>
                 </div>
-            </Scaffold.Body>
-            <Scaffold.Footer>
-                <Buttons.Previous/>
+            </Question.Body>
+            <Question.ButtonFooter>
                 <Buttons.Next handler={next} />
-            </Scaffold.Footer>
-        </Scaffold.Wrapper>
+            </Question.ButtonFooter>
+        </Question.Wrapper>
     );
 }
