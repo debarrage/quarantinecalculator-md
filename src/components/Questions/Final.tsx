@@ -17,7 +17,7 @@ export const Final: React.FC<QuestionProps<IFinalQuestion>> = (props) => {
     return (
         <Question.Wrapper {...props} className={classNames("final", { "final--result": hasResult })}>
             <Question.Title {...props}/>
-            {hasResult&& (
+            {hasResult && (
                 <Question.Body>
                     <div className="final__result">
                         <div className="final__days">
