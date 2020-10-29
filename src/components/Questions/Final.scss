@@ -1,0 +1,53 @@
+@import "../App/colors";
+@import "./params";
+
+$title-font-size: 5vh;
+
+.question {
+    &.question__final {
+        &[class$="--result"] {
+            .question__title {        
+                flex: 1;
+        
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+        
+                h3 {
+                    text-align: center;
+                    font-size: $title-font-size;
+                    line-height: $title-font-size * 0.9;
+                    height: 75%;
+                    width: 90%;
+                    margin: auto auto;
+                }
+            }
+
+            .question__body {
+                width: 100%;
+                flex: 3;
+    
+                display: flex;
+                flex-direction: column;
+    
+                [class^="final"]{
+                    text-align: center;
+                }
+    
+                .final__days {
+                    font-size: $button-font-size*9;
+                    font-weight: bold;
+                    margin-bottom: $button-font-size/2;
+                }
+    
+                .final__date{
+                    font-size: $button-font-size;
+                    margin-bottom: $button-font-size;
+                    span {
+                        padding-right: 1vw;
+                    }
+                }
+            }
+        }
+    }
+}

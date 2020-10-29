@@ -1,0 +1,90 @@
+@import "../App/colors";
+@import "./params";
+
+.question {
+    width: 100%;
+    height:100%;
+    
+    .question__wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .question__element {
+        .octicon {
+            height: $button-font-size;
+        }
+    }
+    
+    .question__title {
+        height: 30vh;
+
+        flex: 2;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        h3 {
+            text-align: center;
+            font-size: $title-font-size;
+            line-height: $title-font-size * 0.9;
+            height: 75%;
+            width: 90%;
+            margin: auto auto;
+        }
+    }
+
+    .question__footer {
+        height: $button-height;
+        background-color: $footer-background;
+
+        position: absolute;
+        bottom:0;
+
+        display: flex;
+        flex-direction: row;
+
+        position: relative;
+
+        .buttons__main{
+            width: 100%;
+            
+            flex:2;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+
+            .buttons__button {
+                flex: 1;
+            }
+        }
+
+        .buttons__button {
+            height: $button-height;
+            line-height: $button-height;
+            font-size: $button-font-size;
+
+            &[class$="previous"] {
+                text-align: left;
+            }
+
+            &[class$="next"] {
+                text-align: right;
+            }
+
+            &[class$="reset"]{
+                width: $button-height !important;
+            }
+
+            &[class$="yes"] {
+                background-color: $green;
+            }
+
+            &[class$="no"] {
+                background-color: $dark-red;
+            }
+        }
+    }
+}

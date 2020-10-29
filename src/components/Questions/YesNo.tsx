@@ -3,7 +3,7 @@ import { QuestionProps } from ".";
 import { IYesNoQuestion } from "../../core/domain";
 import * as Buttons from "./Button";
 import { useNextQuestions } from "./hooks/useNextQuestion";
-import * as Scaffold from "./Scaffold";
+import * as Question from "./Question";
 
 export const YesNo: React.FC<QuestionProps<IYesNoQuestion>> = (props) => {
     
@@ -12,16 +12,16 @@ export const YesNo: React.FC<QuestionProps<IYesNoQuestion>> = (props) => {
     const no = () => dispatcher(props.question.targets.no, false);
 
     return (
-        <Scaffold.Wrapper {...props}>
-            <Scaffold.Title {...props}/>
-            <Scaffold.ButtonFooter>
+        <Question.Wrapper {...props}>
+            <Question.Title {...props}/>
+            <Question.ButtonFooter>
                 <Buttons.Generic handler={yes} name="yes">
                     Ja
                 </Buttons.Generic>
                 <Buttons.Generic handler={no} name="no">
                     Nee
                 </Buttons.Generic>
-            </Scaffold.ButtonFooter>
-        </Scaffold.Wrapper>
+            </Question.ButtonFooter>
+        </Question.Wrapper>
     );
 }

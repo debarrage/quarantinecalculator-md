@@ -1,0 +1,78 @@
+@import "../App/colors";
+@import "./params";
+
+$title-font-size: 5vh;
+
+.question {
+    &.question__day {
+        .question__title {
+            height: 17vh;
+    
+            flex: 1;
+    
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+    
+            h3 {
+                text-align: center;
+                font-size: $title-font-size;
+                line-height: $title-font-size * 0.9;
+                height: 75%;
+                width: 90%;
+                margin: auto auto;
+            }
+        }
+    }
+
+    .question__body {
+        &.daysago {
+            width: 100%;
+            flex: 3;
+
+            display: flex;
+            flex-direction: row;
+
+            .daysago__value {
+                flex: 2;    
+
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+
+                span {
+                    display: block;
+                    text-align: center;
+                    font-size: $button-font-size;
+
+                    &.daysago__title {
+                        margin-bottom: $button-font-size/2;
+                    }
+
+                    &.daysago__result {
+                        font-size: $button-font-size*8;
+                        font-weight: bold;
+                        margin-bottom: $button-font-size/2;
+                    }
+                }
+            }
+
+            .daysago__min, .daysago__plus {
+                width: 10vw;
+
+                display: flex;
+                align-items: center;
+
+                text-align: center;
+
+                .octicon {
+                    height: $button-font-size * 1.5;
+                }
+
+                &[class$="--disabled"] {
+                    visibility: hidden;
+                }
+            }
+        }
+    }
+}

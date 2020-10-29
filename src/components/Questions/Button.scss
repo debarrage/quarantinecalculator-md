@@ -1,0 +1,12 @@
+.buttons__button {
+    text-align: center;
+
+    &[class*="--disabled"] {
+        visibility: hidden;
+    }
+
+    .button__text{
+        text-overflow: ellipsis;
+    }
+}
+

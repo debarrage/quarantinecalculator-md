@@ -1,11 +1,11 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { findInitialQuestion, findQuestion } from "../../core";
-import { IQuestion, IQuestionStackItem } from "../../core/domain";
+import { IQuestion, QuestionResult } from "../../core/domain";
 import { nextQuestionAction, previousQuestionAction, resetAction } from "../actions";
 
 export interface IFlowState {
     current?: IQuestion;
-    stack: Array<IQuestionStackItem>;
+    stack: Array<QuestionResult>;
 }
 
 const INITIAL_STATE: IFlowState = {

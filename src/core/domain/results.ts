@@ -7,6 +7,7 @@ import { IDaysAgoQuestion, INextQuestion, IQuestion, IYesNoQuestion } from "./qu
 
 
 export interface IQuestionResult<T extends IQuestion, R> {
+    question: T;
     type: T["type"];
     result?: R;
 }
@@ -17,9 +18,6 @@ export type YesNoResult = IQuestionResult<IYesNoQuestion, boolean>;
 
 export type QuestionResultTypes = (YesNoResult | NextResult | DaysAgoResult)["result"]
 
-export interface IQuestionStackItem extends IQuestionResult<IQuestion, QuestionResultTypes> {
-    question: IQuestion;
-}
-
+export type QuestionResult = IQuestionResult<IQuestion, QuestionResultTypes>;
 
 
