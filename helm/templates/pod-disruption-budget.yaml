@@ -1,0 +1,11 @@
+{{/* @formatter:off */}}
+{{- $fullname := include "project.fullname" . -}}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $fullname }}
+  labels: {{ include "project.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ (gt .Values.replicaCount 1.0) | ternary .Values.minAvailable 0 }}
+  selector:
+    matchLabels: {{ include "project.selector" . | nindent 6 }}

@@ -1,0 +1,55 @@
+{{/* @formatter:off */}}
+{{- if .Values.ingress.aadAuthentication -}}
+{{- $fullname := include "project.fullname" . -}}
+{{- $proxyname := include "project.oauthproxyname" . -}}
+{{- $host := include "project.tls.host" . -}}
+{{- $baseDomain := include "project.baseDomain" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $proxyname }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $proxyname }}
+  template:
+    metadata:
+      labels:
+        app: {{ $proxyname }}
+    spec:
+      containers:
+      - image: redis:alpine
+        imagePullPolicy: Always
+        name: {{ $proxyname }}-redis
+        ports:
+        - name: redis
+          containerPort: 6379
+          protocol: TCP
+        # TODO: wait for the official v6.x version
+      - image: quay.io/oauth2-proxy/oauth2-proxy:v6.0.0
+        imagePullPolicy: Always
+        name: {{ $proxyname }}
+        ports:
+        - name: http
+          containerPort: 4180
+          protocol: TCP
+        envFrom:
+        - configMapRef:
+            name: {{ $proxyname }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: {{ $proxyname }}
+  name: {{ $proxyname }}
+spec:
+  ports:
+  - name: http
+    port: 4180
+    protocol: TCP
+    targetPort: http
+  selector:
+    app: {{ $proxyname }}
+{{- end -}}

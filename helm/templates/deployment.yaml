@@ -1,0 +1,54 @@
+{{/* @formatter:off */}}
+{{- $fullname := include "project.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullname }}
+  labels: {{ include "project.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels: {{ include "project.selector" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels: {{ include "project.podlabels" . | nindent 8 }}
+      annotations:
+{{- if .Values.prometheus }}
+        prometheus.io/scrape: "true"
+        prometheus.io/path: {{ .Values.prometheus.path | quote }}
+        prometheus.io/port: {{ .Values.image.port | quote }}
+        prometheus.io/scheme: {{ default "http" .Values.prometheus.scheme }}
+{{- end }}
+    spec:
+      imagePullSecrets:
+        - name: {{ default "docker-registry" .Values.imagePullSecret }}
+      containers:
+        - name: {{ include "project.name" . }}
+          image: "{{ required ".Values.image.repository is required" .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - name: http
+              containerPort: {{ .Values.image.port }}
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: {{ $fullname }}
+            - secretRef:
+                name: {{ $fullname }}
+{{- if .Values.image.livenessPath }}
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.image.livenessPath }}
+              port: http
+            initialDelaySeconds: {{ default 120 .Values.image.livenessInitialDelay }}
+            periodSeconds: {{ default 10 .Values.image.periodSeconds }}
+            failureThreshold: {{ default 5 .Values.image.failureThreshold }}
+          readinessProbe: 
+            httpGet:
+              path: {{ .Values.image.livenessPath }}
+              port: http
+            initialDelaySeconds: {{ default 10 .Values.image.readinessInitialDelay }}
+            periodSeconds: {{ default 10 .Values.image.periodSeconds }}
+            failureThreshold: {{ default 5 .Values.image.failureThreshold }}
+{{- end }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}

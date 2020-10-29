@@ -1,0 +1,48 @@
+{{/* @formatter:off */}}
+{{- if .Values.ingress.enabled -}}
+{{- $fullname := include "project.fullname" . -}}
+{{- $proxyname := include "project.oauthproxyname" . -}}
+{{- $host := include "project.tls.host" . -}}
+{{- $baseDomain := include "project.baseDomain" . -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ $fullname }}
+  labels: {{ include "project.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: letsencrypt
+{{- if .Values.ingress.rewriteTarget }}
+    nginx.ingress.kubernetes.io/rewrite-target: {{ .Values.ingress.rewriteTarget | quote }}
+{{- end }}
+{{- if .Values.ingress.cors }}
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+{{- end }}
+{{- if .Values.ingress.appRoot }}
+    nginx.ingress.kubernetes.io/app-root: {{ .Values.ingress.appRoot | quote }}
+{{- end }}
+{{- if .Values.ingress.aadAuthentication }}
+    nginx.ingress.kubernetes.io/auth-response-headers: "x-auth-request-user, x-auth-request-email, authorization"
+    nginx.ingress.kubernetes.io/auth-url: "https://$host/oauth2/auth"
+    # Comment the next line if you just want to validate JWT tokens
+    nginx.ingress.kubernetes.io/auth-signin: "https://$host/oauth2/start?rd=$scheme://$host$request_uri" 
+{{- end }}
+{{- if .Values.ingress.annotations -}}{{- with .Values.ingress.annotations }}
+    {{- toYaml . | nindent 4 }}
+{{- end }}{{- end }}
+spec:
+  rules:
+    - host: {{ $host | quote }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ $fullname }}
+              servicePort: http
+            path: {{ .Values.ingress.path }}
+  tls:
+    - hosts:
+      - {{ $host | quote }}
+      secretName: "{{ $host | replace "." "-" }}-ingress-cert"
+{{- end -}}
