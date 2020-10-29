@@ -1,0 +1,19 @@
+{{/* @formatter:off */}}
+{{- $fullname := include "project.fullname" . -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $fullname }}
+  labels: {{ include "project.labels" . | nindent 4 }}
+data:
+  # Value to control the env scraping by AZ Monitor
+  AZMON_COLLECT_ENV: {{ .Values.image.collectEnvironment | toString | upper | quote }}
+  # Fill in your config map, e.g.:
+  # ENV_VALUE: "some value"
+
+  # If you are using numerical values, do not forget to quote them
+  # PORT: {{ .Values.someNumericalValue | quote }}
+
+  # This value is important for Java 8 projects to avoid OOM Killed events of your pods
+  # The value should be passed to your java start command of course...
+  # JAVA_OPTS: "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Xmx{{ .Values.resources.limits.memory | replace "Mi" "m" }}"
