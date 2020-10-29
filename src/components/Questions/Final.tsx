@@ -25,7 +25,7 @@ export const Final: React.FC<QuestionProps<IFinalQuestion>> = (props) => {
                         </div>
                         <div className="final__date">
                             <span className="text">Tot:</span>
-                            <span className="text">{dayjs().add(result).format("DD-MM-YYYY")}</span>
+                            <span className="text">{dayjs().add(result, "day").format("DD-MM-YYYY")}</span>
                         </div>
                     </div>
                 </Question.Body>
