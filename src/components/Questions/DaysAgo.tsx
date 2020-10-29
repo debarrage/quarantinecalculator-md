@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronUpIcon } from "@primer/octicons-react";
+import { DashIcon, PlusIcon } from "@primer/octicons-react";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import React, { useState } from "react";
@@ -28,9 +28,9 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
         <Question.Wrapper {...props}>
             <Question.Title {...props}/>
             <Question.Body className="daysago" >
-                <div className="daysago__min" onClick={min}>
+                <div className={classNames("daysago__plus", { "button--disabled": result === 0 })} onClick={plus}>
                     <span className="button__text text">
-                        <ChevronDownIcon size="large"/>
+                        <DashIcon size="large" />
                     </span>
                 </div>
                 <div className="button__value daysago__value">
@@ -44,9 +44,9 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
                         {dayjs().add(result, "day").format("DD-MM-YYYY")}
                     </span>
                 </div>
-                <div className={classNames("daysago__plus", { "button--disabled": result === 0 })} onClick={plus}>
+                <div className="daysago__min" onClick={min}>
                     <span className="button__text text">
-                        <ChevronUpIcon size="large" />
+                        <PlusIcon size="large"/>
                     </span>
                 </div>
             </Question.Body>
