@@ -33,6 +33,11 @@
             height: 75%;
             width: 90%;
             margin: auto auto;
+
+            @media (max-aspect-ratio: 3/2) {
+                font-size: $title-font-size/1.2;
+                line-height: $title-font-size * 0.9;
+            }
         }
     }
 
