@@ -1,0 +1,74 @@
+# Define the main branches as trigger
+trigger:
+  - master
+  - development
+   
+variables:
+  container_name: 'md'
+  container_registry: 'debarragedocker'
+  container_repository: 'quarantinecalculator'
+  is_build: $[eq(variables['Build.Reason'], 'IndividualCI')]
+ 
+pool:
+  vmImage: 'ubuntu-latest'
+ 
+stages:
+- stage: preparation
+  displayName: Preparation
+  jobs:
+  - job: version
+    displayName: 'Determine Version'
+    steps:
+    - bash: |
+        VERSION=$(git describe --long --always)
+        echo "##vso[build.updatebuildnumber]$VERSION"
+      displayName: "Set version"
+ 
+- stage: test
+  displayName: Test
+  dependsOn: preparation
+  jobs:
+    - job: test
+      steps:
+      # Define the test steps for your project, for example
+      - bash: npm i
+         
+ 
+- stage: build
+  displayName: Build
+  dependsOn: test
+  jobs:
+    - job: build
+      displayName: "build"
+      condition: and(succeeded(), eq(variables.is_build, true))
+      steps:
+      - bash: npm i && npm run build
+      - task: Docker@2
+        inputs:
+          containerRegistry: '$(container_registry)'
+          repository: '$(container_repository)/$(container_name)'
+          command: 'buildAndPush'
+          # Dockerfile is in the root of the project, it's a relative path
+          Dockerfile: 'Dockerfile'
+          # Context is current directory
+          buildContext: '.'
+          tags: |
+            $(Build.BuildNumber)
+            latest
+    - job: helm
+      displayName: 'Publish Helm'
+      dependsOn: build
+      condition: and(succeeded(), eq(variables.is_build, true))
+      steps:
+      - task: HelmDeploy@0
+        displayName: "Helm package"
+        inputs:
+          command: 'package'
+          chartPath: 'helm'
+          destination: 'helm/package'
+          save: false
+          arguments: '--app-version $(Build.BuildNumber)'
+      - publish: 'helm/package'
+        artifact: '$(container_name)-chart'
+      - publish: 'helm/values'
+        artifact: '$(container_name)-values'
