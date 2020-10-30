@@ -7,6 +7,7 @@ variables:
   container_name: 'md'
   container_registry: 'debarragedocker'
   container_repository: 'quarantinecalculator'
+  environment: 'quarantinecalculator'
   is_build: $[eq(variables['Build.Reason'], 'IndividualCI')]
  
 pool:
@@ -72,3 +73,22 @@ stages:
         artifact: '$(container_name)-chart'
       - publish: 'helm/values'
         artifact: '$(container_name)-values'
+- stage: deploy
+  displayName: Deploy
+  dependsOn: build
+  jobs:
+    - deployment: deploy_helm
+      displayName: 'Deploy Helm'
+      environment: environment
+      strategy:
+        runOnce:
+          preDeploy:
+            steps:
+              - download: helm
+                artifact: '$(container_name)-chart'
+              - download: 
+                artifact: '$(container_name)-values'
+          deploy:
+            steps:
+              - task: HelmDeploy@0
+            
