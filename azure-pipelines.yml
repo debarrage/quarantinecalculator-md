@@ -86,7 +86,7 @@ stages:
             steps:
               - download: helm
                 artifact: '$(container_name)-chart'
-              - download: 
+              - download: helm
                 artifact: '$(container_name)-values'
           deploy:
             steps:
@@ -97,5 +97,5 @@ stages:
                 namespace: 'quarantinecalculator-development'
                 command: 'upgrade'
                 chartType: 'FilePath'
-                chartPath: '$(container_name)-chart/*.tgz'
+                chartPath: 'helm/*.tgz'
                 releaseName: 'quarantinecalculator-md'
