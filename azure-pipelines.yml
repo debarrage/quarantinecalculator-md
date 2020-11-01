@@ -44,19 +44,23 @@ stages:
       condition: and(succeeded(), eq(variables.is_build, true))
       steps:
       - bash: npm i && npm run build
+      
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'debarragedocker'
+          repository: '$(container_repository)/$(container_name)'
+          command: 'build'
+          Dockerfile: 'Dockerfile'
+          buildContext: '.'
+          tags: |
+            $(Build.BuildId)
+            latest
+          arguments: '--build-arg REACT_APP_ENVIRONMENT=$(Build.SourceBranchName) --build-arg REACT_APP_VERSION=$(Build.BuildNumber) --build-arg NODE_ENV=$(Build.SourceBranchName)'
       - task: Docker@2
         inputs:
           containerRegistry: '$(container_registry)'
           repository: '$(container_repository)/$(container_name)'
-          arguments: |
-            REACT_APP_ENVIRONMENT: $(Build.SourceBranchName)
-            REACT_APP_VERSION: $(Build.BuildNumber)
-            NODE_ENV: $(Build.SourceBranchName)
-          command: 'buildAndPush'
-          # Dockerfile is in the root of the project, it's a relative path
-          Dockerfile: 'Dockerfile'
-          # Context is current directory
-          buildContext: '.'
+          command: 'push'
           tags: |
             $(Build.BuildNumber)
             latest
@@ -102,4 +106,6 @@ stages:
                 command: 'upgrade'
                 chartType: 'FilePath'
                 chartPath: '$(Pipeline.Workspace)/$(container_name)-chart/*.tgz'
-                releaseName: 'quarantinecalculator-md'
+                releaseName: '$(Build.DefinitionName)'
+                valueFile: '$(Pipeline.Workspace)/$(container_name)-chart/values-development.yml'
+            
