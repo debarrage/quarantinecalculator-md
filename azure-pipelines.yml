@@ -80,6 +80,7 @@ stages:
     - deployment: helm
       displayName: 'Update Helm'
       environment: develpment
+      condition: and(succeeded(), eq(variables.is_build, true))
       strategy:
         runOnce:
           preDeploy:
