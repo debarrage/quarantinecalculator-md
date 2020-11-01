@@ -44,7 +44,7 @@ service:
 
 ingress:
   # Should enable ingress or not
-  enabled: false
+  enabled: true
   
   # # Set true if you want to enable aad authentication via oauth2-proxy
   # aadAuthentication: true
@@ -69,7 +69,7 @@ ingress:
   # subdomain: "test123"
   
   # Optional value, when not set the default value is the fqdn en will overwrite any domain or subdomain settings.
-  # host: ""
+  host: "to-be-overridden"
   
   # Ingress path, this can be a simple path or a regex to capture groups. If capture groups are provided you should also fill in the reqrite target correctly
   # Read more: https://kubernetes.github.io/ingress-nginx/examples/rewrite/#rewrite-target

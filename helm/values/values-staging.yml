@@ -1,3 +1,6 @@
 # Production values
 # Provide your production variable overrides here, except the secrets...
 environment: staging
+
+ingress:
+  host: "beta.qcalculator.be"
