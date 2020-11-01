@@ -93,6 +93,7 @@ stages:
               artifact: '$(container_name)-chart'
             - download: current
               artifact: '$(container_name)-values'
+            - bash: ls -als /home/vsts/work/1/md-chart
             - task: HelmDeploy@0
               inputs:
                 connectionType: 'Kubernetes Service Connection'
