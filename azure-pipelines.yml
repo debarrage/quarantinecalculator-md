@@ -7,6 +7,7 @@ variables:
   container_name: 'md'
   container_registry: 'debarragedocker'
   container_repository: 'quarantinecalculator'
+  
   is_build: $[eq(variables['Build.Reason'], 'IndividualCI')]
  
 pool:
@@ -72,3 +73,30 @@ stages:
         artifact: '$(container_name)-chart'
       - publish: 'helm/values'
         artifact: '$(container_name)-values'
+- stage: deploy
+  displayName: Deploy
+  dependsOn: build
+  jobs:
+    - deployment: helm
+      displayName: 'Update Helm'
+      environment: develpment
+      condition: and(succeeded(), eq(variables.is_build, true))
+      strategy:
+        runOnce:
+          preDeploy:
+            steps:
+              - download: helm
+                artifact: '$(container_name)-chart'
+              - download: helm
+                artifact: '$(container_name)-values'
+          deploy:
+            steps:
+            - task: HelmDeploy@0
+              inputs:
+                connectionType: 'Kubernetes Service Connection'
+                kubernetesServiceConnection: 'development-db-prod-aks-aks-quarantinecalculator-development-1604158726370'
+                namespace: 'quarantinecalculator-development'
+                command: 'upgrade'
+                chartType: 'FilePath'
+                chartPath: 'helm/*.tgz'
+                releaseName: 'quarantinecalculator-md'
