@@ -1,6 +1,7 @@
-# Staging values
-# Provide your staging variable overrides here, except the secrets...
+# Production values
 environment: production
+
+replicaCount: 2
 
 ingress:
   host: "qcalculator.be"
