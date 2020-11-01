@@ -90,4 +90,12 @@ stages:
                 artifact: '$(container_name)-values'
           deploy:
             steps:
-            
+            - task: HelmDeploy@0
+              inputs:
+                connectionType: 'Kubernetes Service Connection'
+                kubernetesServiceConnection: 'development-db-prod-aks-aks-quarantinecalculator-development-1604158726370'
+                namespace: 'quarantinecalculator-development'
+                command: 'upgrade'
+                chartType: 'FilePath'
+                chartPath: '$(container_name)-chart/*.tgz'
+                releaseName: 'quarantinecalculator-md''
