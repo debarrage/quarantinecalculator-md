@@ -1,6 +1,6 @@
 # Define the main branches as trigger
 trigger:
-  - master
+  - main
   - development
    
 variables:
@@ -83,7 +83,7 @@ stages:
   jobs:
     - deployment: helm
       displayName: 'Update Helm'
-      environment: develpment
+      environment: development
       condition: and(succeeded(), eq(variables.is_build, true))
       strategy:
         runOnce:
