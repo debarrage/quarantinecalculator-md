@@ -1,14 +1,14 @@
 # Define the main branches as trigger
 trigger:
-  - master
+  - main
   - development
    
 variables:
-  container_name: 'md'
-  container_registry: 'debarragedocker'
-  container_repository: 'quarantinecalculator'
-  
-  is_build: $[eq(variables['Build.Reason'], 'IndividualCI')]
+  containerName: 'md'
+  containerRegistry: 'debarragedocker'
+  containerRegistryHost: 'debarragedocker.azurecr.io'
+  containerRepository: 'quarantinecalculator'
+  isBuild: $[eq(variables['Build.Reason'], 'IndividualCI')]
  
 pool:
   vmImage: 'ubuntu-latest'
@@ -41,25 +41,42 @@ stages:
   jobs:
     - job: build
       displayName: "build"
-      condition: and(succeeded(), eq(variables.is_build, true))
-      steps:
-      - bash: npm i && npm run build
-      - task: Docker@2
+      condition: and(succeeded(), eq(variables.isBuild, true))
+      steps:      
+      - task: Bash@3
+        displayName: 'Build App'
         inputs:
-          containerRegistry: '$(container_registry)'
-          repository: '$(container_repository)/$(container_name)'
-          command: 'buildAndPush'
-          # Dockerfile is in the root of the project, it's a relative path
+          targetType: 'inline'
+          script: |
+            export NODE_ENV=$(Build.SourceBranchName)
+            export REACT_APP_ENVIRONMENT=$(Build.SourceBranchName)
+            export REACT_APP_VERSION=$(Build.BuildNumber)
+            npm i && npm run build
+      
+      - task: Docker@2
+        displayName: 'Docker build'
+        inputs:
+          containerRegistry: 'debarragedocker'
+          repository: '$(containerRepository)/$(containerName)'
+          command: 'build'
           Dockerfile: 'Dockerfile'
-          # Context is current directory
           buildContext: '.'
+          tags: |
+            $(Build.BuildNumber)
+            latest
+      - task: Docker@2
+        displayName: 'Docker push'
+        inputs:
+          containerRegistry: '$(containerRegistry)'
+          repository: '$(containerRepository)/$(containerName)'
+          command: 'push'
           tags: |
             $(Build.BuildNumber)
             latest
     - job: helm
       displayName: 'Publish Helm'
       dependsOn: build
-      condition: and(succeeded(), eq(variables.is_build, true))
+      condition: and(succeeded(), eq(variables.isBuild, true))
       steps:
       - task: HelmDeploy@0
         displayName: "Helm package"
@@ -70,27 +87,25 @@ stages:
           save: false
           arguments: '--app-version $(Build.BuildNumber)'
       - publish: 'helm/package'
-        artifact: '$(container_name)-chart'
+        artifact: '$(containerName)-chart'
       - publish: 'helm/values'
-        artifact: '$(container_name)-values'
+        artifact: '$(containerName)-values'
 - stage: deploy
   displayName: Deploy
   dependsOn: build
   jobs:
-    - deployment: helm
+    - deployment: development
       displayName: 'Update Helm'
-      environment: develpment
-      condition: and(succeeded(), eq(variables.is_build, true))
+      environment: development
+      condition: and(succeeded(), eq(variables.isBuild, true),eq(variables['Build.SourceBranchName'], 'development'))
       strategy:
         runOnce:
-          preDeploy:
-            steps:
-              - download: helm
-                artifact: '$(container_name)-chart'
-              - download: helm
-                artifact: '$(container_name)-values'
           deploy:
             steps:
+            - download: current
+              artifact: '$(containerName)-chart'
+            - download: current
+              artifact: '$(containerName)-values'
             - task: HelmDeploy@0
               inputs:
                 connectionType: 'Kubernetes Service Connection'
@@ -98,5 +113,30 @@ stages:
                 namespace: 'quarantinecalculator-development'
                 command: 'upgrade'
                 chartType: 'FilePath'
-                chartPath: 'helm/*.tgz'
-                releaseName: 'quarantinecalculator-md'
+                chartPath: '$(Pipeline.Workspace)/$(containerName)-chart/quarantinecalculator-md-0.6.6.tgz'
+                releaseName: '$(containerRepository)-$(containerName)'
+                overrideValues: 'image.repository=$(containerRegistryHost)/$(containerRepository)/$(containerName)'
+                valueFile: '$(Pipeline.Workspace)/$(containerName)-values/values-development.yml'
+    - deployment: production
+      displayName: 'Update Helm'
+      environment: production
+      condition: and(succeeded(), eq(variables.isBuild, true),eq(variables['Build.SourceBranchName'], 'main'))
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: '$(containerName)-chart'
+            - download: current
+              artifact: '$(containerName)-values'
+            - task: HelmDeploy@0
+              inputs:
+                connectionType: 'Kubernetes Service Connection'
+                kubernetesServiceConnection: 'production-db-prod-aks-aks-quarantinecalculator-production-1604158748558'
+                namespace: 'quarantinecalculator-production'
+                command: 'upgrade'
+                chartType: 'FilePath'
+                chartPath: '$(Pipeline.Workspace)/$(containerName)-chart/quarantinecalculator-md-0.6.6.tgz'
+                releaseName: '$(containerRepository)-$(containerName)'
+                overrideValues: 'image.repository=$(containerRegistryHost)/$(containerRepository)/$(containerName)'
+                valueFile: '$(Pipeline.Workspace)/$(containerName)-values/values-production.yml'

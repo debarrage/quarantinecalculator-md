@@ -1,0 +1,34 @@
+@import "./colors";
+
+.app__footer{
+    &.footer {    
+        background-color: lighten($footer-background, 60%);
+        color: $footer-background;
+        font-size: small;
+        
+        [class^='footer__element'] {
+            display: inline-block;
+
+            height: 5vh;
+            line-height: 5vh;
+            padding-left: 1vh;
+
+            a, span {
+                margin-right: 1vw;
+            }
+
+            a {
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            &[class*='--left'] {
+                float: left;
+            }
+
+            &[class*='--right'] {
+                float: right;
+            }
+        }
+    }
+}

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { initDoneAction } from "../../store/actions";
+import { Footer } from "./Footer";
 import "./Scaffold.scss";
 
 export const Scaffold: React.FC = (props) => {
@@ -13,7 +14,10 @@ export const Scaffold: React.FC = (props) => {
 
     return (
         <div className="app">
-            {props.children}
+            <div className="app__body">
+                {props.children}
+            </div>
+            <Footer/>
         </div>
     )
 };

@@ -1,0 +1,5 @@
+# Development values
+environment: development
+
+ingress:
+  host: "beta.qcalculator.be"
