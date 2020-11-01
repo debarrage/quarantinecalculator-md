@@ -85,9 +85,9 @@ stages:
         runOnce:
           preDeploy:
             steps:
-              - download: helm
+              - download: current
                 artifact: '$(container_name)-chart'
-              - download: helm
+              - download: current
                 artifact: '$(container_name)-values'
           deploy:
             steps:

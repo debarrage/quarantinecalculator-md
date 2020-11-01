@@ -26,7 +26,6 @@ spec:
         - name: redis
           containerPort: 6379
           protocol: TCP
-        # TODO: wait for the official v6.x version
       - image: quay.io/oauth2-proxy/oauth2-proxy:v6.0.0
         imagePullPolicy: Always
         name: {{ $proxyname }}
