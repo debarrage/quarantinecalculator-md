@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
                     <MarkGithubIcon/> 
                 </a>
                 <span>
-                    {process.env.REACT_APP_VERSION}
+                    v{process.env.REACT_APP_VERSION}
                 </span>
             </div>
             <div className="footer__element--right">
