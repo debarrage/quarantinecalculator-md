@@ -7,7 +7,6 @@ variables:
   container_name: 'md'
   container_registry: 'debarragedocker'
   container_repository: 'quarantinecalculator'
-  environment: 'quarantinecalculator'
   is_build: $[eq(variables['Build.Reason'], 'IndividualCI')]
  
 pool:
