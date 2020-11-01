@@ -87,14 +87,12 @@ stages:
       condition: and(succeeded(), eq(variables.is_build, true))
       strategy:
         runOnce:
-          preDeploy:
-            steps:
-              - download: current
-                artifact: '$(container_name)-chart'
-              - download: current
-                artifact: '$(container_name)-values'
           deploy:
             steps:
+            - download: current
+              artifact: '$(container_name)-chart'
+            - download: current
+              artifact: '$(container_name)-values'
             - task: HelmDeploy@0
               inputs:
                 connectionType: 'Kubernetes Service Connection'
