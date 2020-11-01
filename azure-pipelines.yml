@@ -77,9 +77,9 @@ stages:
   displayName: Deploy
   dependsOn: build
   jobs:
-    - deployment: deploy_helm
-      displayName: 'Deploy Helm'
-      environment: environment
+    - deployment: helm
+      displayName: 'Update Helm'
+      environment: develpment
       strategy:
         runOnce:
           preDeploy:
@@ -90,5 +90,4 @@ stages:
                 artifact: '$(container_name)-values'
           deploy:
             steps:
-              - task: HelmDeploy@0
             
