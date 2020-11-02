@@ -7,6 +7,10 @@ html {
     color: $font-color;
 
     background: $dark-red;
+
+    #root {
+        background: $dark-red;
+    }
 }
 
 .app {
