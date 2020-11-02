@@ -2,7 +2,6 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     plugins: ['@typescript-eslint'],
     extends: [
-        "eslint:recommended",
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
     ],
@@ -16,9 +15,6 @@ module.exports = {
         project: 'tsconfig.json',
         ecmaVersion: 2018,
         sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true // Allows for the parsing of JSX
-        }
     },
     settings: {
         "react": {
@@ -27,6 +23,7 @@ module.exports = {
     },
     rules: {
         // Special ESLint rules or overrides go here.
+        "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/interface-name-prefix": [0, { "prefixWithI": "always" }],
         "@typescript-eslint/no-unused-vars": "error",

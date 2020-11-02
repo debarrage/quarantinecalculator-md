@@ -5,28 +5,30 @@ html {
     font-family: 'Montserrat', sans-serif;
     font-weight: 100 !important;
     color: $font-color;
-    
+
+    background: $dark-red;
 }
 
 .app {
     position:fixed;
     top: 0;
     left: 0;
-    right:0;
-    bottom:0;
+    
+    width: 100vw;
     overflow: hidden;
-    background: $dark-red;
-    background: linear-gradient(150deg, rgba($dark-red,1) 0%, rgba($red,1) 50%, rgba($orange,1) 100%);
+
     display: flex;
     flex-direction: column;
+    
+    background: linear-gradient(150deg, rgba($dark-red,1) 0%, rgba($red,1) 50%, rgba($orange,1) 100%);
 
     .app__body {
         width: 100%;
-        height: 95vh;
+        height: 95%;
     }
 
     .app__footer {
         width: 100%;
-        height: 5vh;
+        height: 5%;
     }
 }
