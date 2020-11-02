@@ -33,7 +33,7 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
                         <DashIcon size="large" />
                     </span>
                 </div>
-                <div className="button__value daysago__value">
+                <div className="button__value daysago__value" onClick={min}>
                     <span className="daysago__title text">
                         Aantal dagen geleden:
                     </span>
