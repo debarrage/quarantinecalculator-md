@@ -14,7 +14,11 @@ The goal of the app is a simple function `f(questions) -> number of days to stay
 the MD can use the tool to question the patient and prescribe the correct days to stay in quarantine.
 
 ## Program flow
+### V1
 ![Flow based on the sciensano docs](./doc/flow-v1.jpeg)
+
+### V2
+![Improved flow based on the sciensano docs](./doc/flow-v2.jpeg)
 
 ## Development
 In the project directory, you can run:
