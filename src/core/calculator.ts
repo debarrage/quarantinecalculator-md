@@ -9,12 +9,12 @@ export class Calculator {
 
         const { id } = final;
 
-        if(id === "f3") {
+        if(id === "sf7") {
             return this.calculateF3();
         }
 
-        if(id === "f2") {
-            if(this.getYesNoResult("s6")) {
+        if(id === "rf3") {
+            if(this.getYesNoResult("s8n")) {
                 const f2 = this.calculateF2();
                 const f3 = this.calculateF3();
 
@@ -64,20 +64,20 @@ export class Calculator {
     }
 
     calculateF2(): number {
-        const isHouseMate = this.getYesNoResult("r2");
-        const isHouseQuarantinePossible = this.getYesNoResult("r3");
+        const isHouseMate = this.getYesNoResult("r3");
+        const isHouseQuarantinePossible = this.getYesNoResult("r8");
         if(isHouseMate) {
             if(isHouseQuarantinePossible) {
-                return this.getDaysResult("r4") + 10;
+                return this.getDaysResult("r9n") + 10;
             } else {
-                return this.getDaysResult("r2a") + 17;
+                return this.getDaysResult("r4") + 17;
             }
         } else {
-            return this.getDaysResult("r2b") + 10;
+            return this.getDaysResult("r5y") + 10;
         }
     }
 
     calculateF3(): number {
-        return this.getDaysResult("s1") + 7;
+        return this.getDaysResult("s3y") + 7;
     }
 }
