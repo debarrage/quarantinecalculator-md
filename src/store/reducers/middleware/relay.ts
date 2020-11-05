@@ -22,6 +22,8 @@ export const relay: CalculatorMiddleware = (store) => (next) => (action: Action)
             const id = yes ? question.targets.yes : question.targets.no;
 
             next(nextQuestionAction({ id }));
+        } else {
+            next(action);
         }
     }
 };

@@ -10,6 +10,8 @@ export const Next: React.FC<QuestionProps<INextQuestion>> = (props) => {
     const dispatcher = useNextQuestions();
     const next = () => dispatcher(props.question.targets.next);
 
+    
+
     return (
         <Question.Wrapper {...props}>
             <Question.Title {...props}/>
