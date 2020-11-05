@@ -40,12 +40,16 @@ $title-font-size: 5vh;
                     margin-bottom: $button-font-size/2;
                 }
     
-                .final__date{
-                    font-size: $button-font-size;
-                    margin-bottom: $button-font-size;
+                .final__date, .final__designation {
+                    font-size: $button-font-size * .9;
+                    margin-bottom: $button-font-size/2;
                     span {
                         padding-right: 1vw;
                     }
+                }
+
+                .final__designation {
+                    min-height: 5vh;
                 }
             }
         }

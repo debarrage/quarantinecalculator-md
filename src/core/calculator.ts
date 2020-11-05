@@ -14,7 +14,7 @@ export class Calculator {
 
         const { id } = final;
 
-        if(id === "sf6" || id === "sf7" || id === "sf8") {
+        if(id === "sf6") {
             return this.calculateF3();
         }
 

@@ -4,7 +4,7 @@ import { DaysAgo } from "../Questions/DaysAgo";
 import { Final } from "../Questions/Final";
 import { useCurrentQuestion } from "../Questions/hooks/useCurrentQuestion";
 import { Next } from "../Questions/Next";
-import * as Scaffold from "../Questions/Question";
+import * as Question from "../Questions/Question";
 import { YesNo } from "../Questions/YesNo";
 
 /**
@@ -33,6 +33,12 @@ export const Router: React.FC = () => {
     }
 
     return (
-        <Scaffold.Body>Vraag is niet gevonden...</Scaffold.Body>
+        <Question.Wrapper>
+            <Question.Body>
+                <span className="text">
+                    Vraag is niet gevonden...
+                </span>
+            </Question.Body>
+        </Question.Wrapper>
     );
 }
