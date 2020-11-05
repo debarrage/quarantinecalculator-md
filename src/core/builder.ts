@@ -1,4 +1,4 @@
-import { IDaysAgoQuestion, IFinalQuestion, INextQuestion, IYesNoQuestion, Question, QuestionId } from "./domain";
+import { Designation, IDaysAgoQuestion, IFinalQuestion, INextQuestion, IRelayQuestion, IYesNoQuestion, Question, QuestionId } from "./domain";
 
 export class QuestionBuilder {
 
@@ -66,6 +66,41 @@ export class QuestionBuilder {
         }
         throw new Error("Invalid settings, id and title should be set");
     }
+
+    withYesNoRelay(yes: QuestionId, no: QuestionId, yesCondition: QuestionId): IRelayQuestion {
+        if(this.question.id) {
+            return {
+                id: this.question.id,
+                title: "",
+                type: "relay",
+                yesCondition,
+                targets: {
+                    yes,
+                    no,
+                },
+            }
+        }
+        throw new Error("Invalid settings, id and should be set");       
+    }
 }
 
-export const builder = (id: QuestionId): QuestionBuilder => new QuestionBuilder(id);
+export class DesignationBuilder {
+    private designation: Partial<Designation> = {};
+
+    constructor(id: QuestionId) {
+        this.designation.id = id;
+    }
+
+    withDesignation(designation: string | React.ReactElement): Designation {
+        if(this.designation.id) {
+            return {
+                id: this.designation.id,
+                designation,
+            }
+        }
+        throw new Error("Invalid settings, id should be set");
+    }
+}
+
+export const qb = (id: QuestionId): QuestionBuilder => new QuestionBuilder(id);
+export const db = (id: QuestionId): DesignationBuilder => new DesignationBuilder(id);
