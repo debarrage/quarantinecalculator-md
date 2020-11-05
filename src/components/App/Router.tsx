@@ -7,6 +7,9 @@ import { Next } from "../Questions/Next";
 import * as Scaffold from "../Questions/Question";
 import { YesNo } from "../Questions/YesNo";
 
+/**
+ * The Router component. It uses the current question to determine the rendering.
+ */
 export const Router: React.FC = () => {
     
     const question = useCurrentQuestion();

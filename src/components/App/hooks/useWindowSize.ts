@@ -1,6 +1,10 @@
 import { useLayoutEffect, useState } from "react";
 
-export function useWindowSize(marginTop: number) {
+/**
+ * Hook: calculates the windowsize minus a margintop
+ * @param marginTop number, default 0
+ */
+export function useWindowSize(marginTop = 0) {
     const [size, setSize] = useState<[number, number]>([0, 0]);
 
     useLayoutEffect(() => {

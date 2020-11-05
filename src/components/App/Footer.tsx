@@ -2,6 +2,9 @@ import { MarkGithubIcon } from "@primer/octicons-react";
 import React from "react";
 import "./Footer.scss";
 
+/**
+ * Footer component
+ */
 export const Footer: React.FC = () => {
     return (
         <div className="app__footer footer">

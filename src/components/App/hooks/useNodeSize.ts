@@ -8,6 +8,10 @@ function getSize(node: HTMLElement): [number, number] {
     return [0, 0];
 }
 
+/**
+ * Calculates the size of the referred node. The hook returns a ref and a size object. 
+ * The ref should be attached to a ReactElement. 
+ */
 export function useNodeSize(): [(node: HTMLElement | null) => void, [number, number]] {
     const [size, setSize] = useState<[number, number]>([0, 0]);
     const [node, setNode] = useState<HTMLElement | null>(null);

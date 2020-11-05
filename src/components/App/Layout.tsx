@@ -3,11 +3,17 @@ import { useDispatch } from "react-redux";
 import { initDoneAction } from "../../store/actions";
 import { Footer } from "./Footer";
 import { useWindowSize } from "./hooks/useWindowSize";
-import "./Scaffold.scss";
+import "./Layout.scss";
 
+/**
+ * App layout component. It uses the window size to set a fixed
+ * height and width of the component.
+ * 
+ * @param props 
+ */
 export const Scaffold: React.FC = (props) => {
     
-    const [width, height] = useWindowSize(0);
+    const [width, height] = useWindowSize();
     const dispatch = useDispatch();
 
 
