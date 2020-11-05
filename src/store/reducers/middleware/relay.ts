@@ -1,6 +1,6 @@
 import { Action, Dispatch, Middleware } from "redux";
 import { findQuestion, isYesNoRelayQuestion } from "../../../core";
-import { StackUtils } from "../../../core/util";
+import { StackUtils } from "../../../core/calculations/util";
 import { nextQuestionAction } from "../../actions";
 import { IApplicationState } from "../../state";
 

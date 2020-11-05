@@ -1,6 +1,6 @@
-import { IFinalQuestion } from ".";
-import { IFlowState } from "../store/reducers/flow";
-import { findDesignation } from "./config";
+import { IFinalQuestion } from "..";
+import { IFlowState } from "../../store/reducers/flow";
+import { findDesignation } from "../config";
 import { StackUtils } from "./util";
 
 export class Designation {

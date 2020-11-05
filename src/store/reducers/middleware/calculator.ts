@@ -1,7 +1,7 @@
 import { Action, Dispatch, Middleware } from "redux";
 import { findQuestion, isFinal } from "../../../core";
-import { Calculator } from "../../../core/calculator";
-import { Designation } from "../../../core/designation";
+import { Calculator } from "../../../core/calculations/calculator";
+import { Designation } from "../../../core/calculations/designation";
 import { nextQuestionAction } from "../../actions";
 import { setCalculatorResultAction, setQuarantineDesignationAction } from "../../actions/calculator";
 import { IApplicationState } from "../../state";

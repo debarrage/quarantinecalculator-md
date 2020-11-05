@@ -1,5 +1,5 @@
-import { isDaysAgoResult, QuestionId, QuestionResult } from ".";
-import { IFlowState } from "../store/reducers/flow";
+import { isDaysAgoResult, QuestionId, QuestionResult } from "..";
+import { IFlowState } from "../../store/reducers/flow";
 
 export class StackUtils {
     constructor(private stack: IFlowState["stack"]) {}

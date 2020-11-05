@@ -1,7 +1,11 @@
-import { IFlowState } from "../store/reducers/flow";
-import { IFinalQuestion } from "./domain";
+import { IFlowState } from "../../store/reducers/flow";
+import { IFinalQuestion } from "../domain";
 import { StackUtils } from "./util";
 
+/**
+ * Calculates the number of days in quarantine based on the Sciensano documentation flows
+ * based on the path followed through the flow.
+ */
 export class Calculator {
 
     private stackUtils: StackUtils;
