@@ -1,9 +1,9 @@
 import { IQuestion } from "./questions";
 
+export * from "./designations";
 export * from "./guards";
 export * from "./questions";
 export * from "./results";
-
 
 export interface IQuestionVoidResult<T extends IQuestion> {
     question: T;

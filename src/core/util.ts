@@ -39,4 +39,10 @@ export class StackUtils {
         }
         return false;
     }
+
+    public getReferringQuestion() {
+        if(this.stack.length >= 2) {
+            return this.stack.slice(-1)[0]
+        }
+    }
 }

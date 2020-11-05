@@ -1,6 +1,6 @@
 export type QuestionId = string;
 
-export type QuestionType = "next" | "yesno" | "day" | "final";
+export type QuestionType = "next" | "yesno" | "day" | "final" | "relay";
 
 export interface IQuestion {
     id: QuestionId;
@@ -19,6 +19,15 @@ export interface INextQuestion extends IQuestion {
 
 export interface IYesNoQuestion extends IQuestion {
     type: "yesno";
+    targets: {
+        no: QuestionId;
+        yes: QuestionId;
+    };
+}
+
+export interface IRelayQuestion extends IQuestion {
+    type: "relay";
+    yesCondition: QuestionId,
     targets: {
         no: QuestionId;
         yes: QuestionId;

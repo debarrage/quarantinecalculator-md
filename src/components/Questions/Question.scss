@@ -1,4 +1,5 @@
 @import "../App/colors";
+@import "../App/fluid";
 @import "./params";
 
 .question {
@@ -35,10 +36,12 @@
             width: 90%;
             margin: auto auto;
 
-            @media (max-aspect-ratio: 3/2) {
-                font-size: $title-font-size/1.2;
-                line-height: $title-font-size * 0.9;
-            }
+            @include fluid-type(360px, 1000px, 34px, 40px);
+
+            // @media (max-aspect-ratio: 3/2) {
+            //     font-size: $title-font-size/1.4;
+            //     line-height: $title-font-size * .8;
+            // }
         }
     }
 

@@ -8,12 +8,12 @@ import "./Question.scss";
 type ClassNameProps = { className?: string };
 type DefaultProps = QuestionProps<IQuestion>;
 
-export const Wrapper: React.FC<DefaultProps & ClassNameProps> = (props) => {
+export const Wrapper: React.FC<Partial<DefaultProps> & ClassNameProps> = (props) => {
 
     const className = classNames(
         "question",
-        `question__${props.question.type}`,
-        `question__${props.question?.id}`,
+        `question__${props.question?.type || "unknown"}`,
+        `question__${props.question?.id || "unknown"}`,
         props.className
     );
 

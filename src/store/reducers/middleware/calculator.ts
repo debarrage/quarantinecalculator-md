@@ -1,8 +1,9 @@
 import { Action, Dispatch, Middleware } from "redux";
 import { findQuestion, isFinal } from "../../../core";
 import { Calculator } from "../../../core/calculator";
+import { Designation } from "../../../core/designation";
 import { nextQuestionAction } from "../../actions";
-import { setCalculatorResultAction } from "../../actions/calculator";
+import { setCalculatorResultAction, setQuarantineDesignationAction } from "../../actions/calculator";
 import { IApplicationState } from "../../state";
 
 type CalculatorMiddleware = Middleware<unknown, IApplicationState, Dispatch>;
@@ -23,6 +24,11 @@ export const calculator: CalculatorMiddleware = (store) => (next) => (action: Ac
             const calculator = new Calculator(stack);
             
             next(setCalculatorResultAction(calculator.calculate(question)));
+            
+            const designation = new Designation(stack).find(question);
+            if(designation) {
+                next(setQuarantineDesignationAction(designation.id));
+            }
         }
     }
 };
