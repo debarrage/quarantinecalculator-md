@@ -1,20 +1,25 @@
-import { QuestionId } from ".";
 import { IFlowState } from "../store/reducers/flow";
-import { IFinalQuestion, isDaysAgoResult, QuestionResult } from "./domain";
+import { IFinalQuestion } from "./domain";
+import { StackUtils } from "./util";
 
 export class Calculator {
-    constructor(private stack: IFlowState["stack"]) {}
+
+    private stackUtils: StackUtils;
+
+    constructor(private stack: IFlowState["stack"]) {
+        this.stackUtils = new StackUtils(stack);
+    }
 
     public calculate(final: IFinalQuestion): number {
 
         const { id } = final;
 
-        if(id === "sf7") {
+        if(id === "sf6") {
             return this.calculateF3();
         }
 
         if(id === "rf3") {
-            if(this.getYesNoResult("s8n")) {
+            if(this.stackUtils.getYesNoResult("s8n")) {
                 const f2 = this.calculateF2();
                 const f3 = this.calculateF3();
 
@@ -27,57 +32,21 @@ export class Calculator {
         return -1;
     }
 
-    public find(id: QuestionId): QuestionResult {
-        const question = this.stack.find(s => s.question.id === id);
-        if(question) {
-            return question;
-        } else {
-            throw new Error(`Cannot find question id ${id}`);
-        }
-    }
-
-    public tryFind(id: QuestionId): QuestionResult | undefined {
-        try {
-            return this.find(id);
-        } catch(e) {
-            console.warn(e.messasge);
-        }
-    }
-    
-    public getDaysResult(id: QuestionId): number {
-        const result = this.find(id);
-        let days = 0;
-        if(isDaysAgoResult(result)) {
-            days = result.result || 0;
-        } else {
-            console.warn(`Question ${id} is not of type DaysAgoResult`)
-        }   
-        return days;
-    }
-
-    public getYesNoResult(id: QuestionId): boolean {
-        const result = this.tryFind(id);
-        if(result) {
-            return !!result.result;
-        }
-        return false;
-    }
-
-    calculateF2(): number {
-        const isHouseMate = this.getYesNoResult("r3");
-        const isHouseQuarantinePossible = this.getYesNoResult("r8");
+    private calculateF2(): number {
+        const isHouseMate = this.stackUtils.getYesNoResult("r3");
+        const isHouseQuarantinePossible = this.stackUtils.getYesNoResult("r8");
         if(isHouseMate) {
             if(isHouseQuarantinePossible) {
-                return this.getDaysResult("r9n") + 10;
+                return this.stackUtils.getDaysResult("r9n") + 10;
             } else {
-                return this.getDaysResult("r4") + 17;
+                return this.stackUtils.getDaysResult("r4") + 17;
             }
         } else {
-            return this.getDaysResult("r5y") + 10;
+            return this.stackUtils.getDaysResult("r5y") + 10;
         }
     }
 
-    calculateF3(): number {
-        return this.getDaysResult("s3y") + 7;
+    private calculateF3(): number {
+        return this.stackUtils.getDaysResult("s3y") + 7;
     }
 }
