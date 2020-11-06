@@ -8,7 +8,7 @@ import * as Question from "./Question";
 export const Next: React.FC<QuestionProps<INextQuestion>> = (props) => {
     
     const dispatcher = useNextQuestions();
-    const next = () => dispatcher(props.question.targets.next);
+    const next = () => dispatcher();
 
     
 

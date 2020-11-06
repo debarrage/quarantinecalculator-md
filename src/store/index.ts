@@ -11,8 +11,9 @@ declare global {
     }
 }
 
-// Central store
-export const store = createStore(
-    rootReducer,
-    (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(applyMiddleware(haptics, relay, calculator))
-);
+export const initStore = () => {
+    return createStore(
+        rootReducer,
+        (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(applyMiddleware(haptics, relay, calculator))
+    );
+};

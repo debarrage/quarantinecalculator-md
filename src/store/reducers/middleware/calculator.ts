@@ -1,5 +1,5 @@
 import { Action, Dispatch, Middleware } from "redux";
-import { findQuestion, isFinal } from "../../../core";
+import { isFinal } from "../../../core";
 import { Calculator } from "../../../core/calculations/calculator";
 import { Designation } from "../../../core/calculations/designation";
 import { nextQuestionAction } from "../../actions";
@@ -18,14 +18,14 @@ export const calculator: CalculatorMiddleware = (store) => (next) => (action: Ac
     
     if(isNextQuestionAction(action)) {
         // Instantiate calculator if it is final
-        const question = findQuestion(action.payload.id);
-        if(question && isFinal(question)) {
-            const { stack } = store.getState().flow;
-            const calculator = new Calculator(stack);
+        const question = store.getState().flow.current;
+        if(isFinal(question)) {
+            const { path } = store.getState().flow;
+            const calculator = new Calculator(path);
             
             next(setCalculatorResultAction(calculator.calculate(question)));
             
-            const designation = new Designation(stack).find(question);
+            const designation = new Designation(path).find(question);
             if(designation) {
                 next(setQuarantineDesignationAction(designation.id));
             }

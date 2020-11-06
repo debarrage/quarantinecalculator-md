@@ -1,5 +1,5 @@
 import { INextQuestion, IYesNoQuestion } from ".";
-import { Designation } from "./designations";
+import { IDesignation } from "./designations";
 import { IDaysAgoQuestion, IFinalQuestion, IQuestion, IRelayQuestion } from "./questions";
 import { DaysAgoResult, QuestionResult, YesNoResult } from "./results";
 
@@ -31,7 +31,7 @@ export function isYesNoResult(r: QuestionResult): r is YesNoResult {
     return isYesNoQuestion(r.question);
 }
 
-export function isDesignation(object: unknown): object is Designation {
-    const designation = object as Designation;
+export function isDesignation(object: unknown): object is IDesignation {
+    const designation = object as IDesignation;
     return !!designation.id && !!designation.designation;
 }

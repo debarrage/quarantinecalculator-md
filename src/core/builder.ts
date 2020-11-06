@@ -1,4 +1,4 @@
-import { Designation, IDaysAgoQuestion, IFinalQuestion, INextQuestion, IRelayQuestion, IYesNoQuestion, Question, QuestionId } from "./domain";
+import { IDaysAgoQuestion, IDesignation, IFinalQuestion, INextQuestion, IRelayQuestion, IYesNoQuestion, Question, QuestionId } from "./domain";
 
 export class QuestionBuilder {
 
@@ -84,14 +84,17 @@ export class QuestionBuilder {
     }
 }
 
+/**
+ * 
+ */
 export class DesignationBuilder {
-    private designation: Partial<Designation> = {};
+    private designation: Partial<IDesignation> = {};
 
     constructor(id: QuestionId) {
         this.designation.id = id;
     }
 
-    withDesignation(designation: string | React.ReactElement): Designation {
+    withDesignation(designation: string | React.ReactElement): IDesignation {
         if(this.designation.id) {
             return {
                 id: this.designation.id,

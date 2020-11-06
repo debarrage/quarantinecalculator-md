@@ -8,8 +8,8 @@ import * as Question from "./Question";
 export const YesNo: React.FC<QuestionProps<IYesNoQuestion>> = (props) => {
     
     const dispatcher = useNextQuestions();
-    const yes = () => dispatcher(props.question.targets.yes, true);
-    const no = () => dispatcher(props.question.targets.no, false);
+    const yes = () => dispatcher(true);
+    const no = () => dispatcher(false);
 
     return (
         <Question.Wrapper {...props}>
