@@ -11,7 +11,7 @@ import "./Layout.scss";
  * 
  * @param props 
  */
-export const Scaffold: React.FC = (props) => {
+export const Layout: React.FC = (props) => {
     
     const [width, height] = useWindowSize();
     const dispatch = useDispatch();

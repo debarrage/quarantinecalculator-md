@@ -1,33 +1,28 @@
 import { IFinalQuestion } from "..";
 import { IFlowState } from "../../store/reducers/flow";
 import { findDesignation } from "../config";
-import { StackUtils } from "./util";
+import { PathUtils, pathUtils } from "./utils";
 
 export class Designation {
-    private stackUtils: StackUtils;
+    private utils: PathUtils;
 
-    constructor(private stack: IFlowState["stack"]) {
-        this.stackUtils = new StackUtils(stack);
-
+    constructor(private path: IFlowState["path"]) {
+        this.utils = pathUtils(path);
     }
 
     public find(final: IFinalQuestion) {
-        const referrer = this.stackUtils.getReferringQuestion();
-        console.log(referrer);
-        if(referrer) {
-            if(referrer.question.id === "s3n") {
-                return findDesignation("s3n");
+
+        if(final.id === "sf2") {
+            return findDesignation("sf2");
+        }
+        
+        if(final.id === "sf6") {
+            if(this.utils.getYesNoResult("s7y")) {
+                return findDesignation("sy7");
             }
-            
-            if(final.id === "sf6") {
 
-                if(referrer.question.id === "s7y") {
-                    return findDesignation("sy7");
-                }
-
-                if(referrer.question.id === "s10" && referrer.result) {
-                    return findDesignation("s10");
-                }
+            if(this.utils.getYesNoResult("s10")) {
+                return findDesignation("s10");
             }
         }
     }

@@ -2,7 +2,7 @@ import { ChevronLeftIcon, ChevronRightIcon, SyncIcon } from "@primer/octicons-re
 import classNames from "classnames";
 import React from "react";
 import "./Button.scss";
-import { useIsEmptyStack } from "./hooks/useIsEmptyStack";
+import { useIsEmptyPath } from "./hooks/useIsEmptyPath";
 import { usePreviousQuestion } from "./hooks/usePreviousQuestion";
 import { useReset } from "./hooks/useReset";
 
@@ -27,10 +27,10 @@ export const Generic: React.FC<GenericProps> = (props) => {
 export const Previous: React.FC = () => {
 
     const previous = usePreviousQuestion();
-    const isEmptyStack = useIsEmptyStack();
+    const emptyPath = useIsEmptyPath();
 
     return (
-        <Generic handler={previous} name="previous" disabled={isEmptyStack}>
+        <Generic handler={previous} name="previous" disabled={emptyPath}>
             <span className="button__text text">
                 <ChevronLeftIcon size="large" verticalAlign="middle" />
                 Vorige

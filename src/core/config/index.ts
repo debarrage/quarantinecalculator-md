@@ -1,15 +1,17 @@
-import { db, qb } from "./builder";
-import { Designation, Designations, IQuestion, QuestionId, Questions } from "./domain";
+import { db, qb } from "../builder";
+import { Designations, QuestionId, Questions } from "../domain";
+export * from "../builder";
+export * from "./utils";
 
 export const INITIAL_QUESTION_ID: QuestionId = "0";
 
 export const questions: Questions= [
     // Introduction and main question
     qb(INITIAL_QUESTION_ID).withTitle("Start de Covid Quarantaine Calculator.").withNext("1"),
-    qb("1").withTitle("Is de patient symptomatisch? en voldoet hij aan de gevalsdefinitie?").withYesNo("s1","r1"),
+    qb("1").withTitle("Is de patient symptomatisch? Voldoet hij aan de gevalsdefinitie?").withYesNo("s1","r1"),
     
     // Questions r-tree
-    qb("r1").withTitle("Is er een hoog risico conrtact geweest met een bevestigd covid geval? Of komt de patient uit een rode zone?").withYesNo("r2y", "r11n"),
+    qb("r1").withTitle("Is er een hoog risico contact geweest met een bevestigd covid geval? Of komt de patient uit een rode zone?").withYesNo("r2y", "r11n"),
     qb("r10").withTitle("Wanneer is het laatste risicocontact geweest?").withDaysAgo("rf3"),
     qb("r11n").withTitle("Is er een andere indicatie om toch te testen?").withYesNo("r5y", "rf1"),
     qb("r2n").withTitle("Heeft de patient in de afgelopen 2 maanden een positieve test (PCR) gehad?").withYesNo("rf1", "r11n"),
@@ -26,12 +28,11 @@ export const questions: Questions= [
     // Final answers r-tree
     qb("rf1").withTitle("Geen quarantaine nodig").final(),
     qb("rf2").withTitle("Aantal dagen quarantaine").final(),
-    qb("rf3").withTitle("Aantal dagen quarantaine. Nadien is er een verhoogde waakzaamheid voor 4 extra dagen.").final(),
     
     // Questions s-tree 
     qb("s1").withTitle("Vertoont de patiënt ernstige symptomen?").withYesNo("sf1", "s11"),
     qb("s11").withTitle("Heeft men hoog risico contact gehad?").withYesNo("s2n","s2n"),
-    qb("s10").withTitle("Zorgpersoneel?").withYesNo("sf6","sf6"),
+    qb("s10").withTitle("Zorgpersoneel?").withYesNo("s12","s12"),
     qb("s2n").withTitle("Is de patiënt ouder dan 6 jaar?").withYesNo("s3y","s3n"),
     qb("s3n").withTitle("Is er een indicatie om te testen om bijvoorbeeld een ernstig ziek familie lid te beschermen?").withYesNo("sf2","sf3"),
     qb("s3y").withTitle("Wanneer zijn de klachten begonnen?").withDaysAgo("s4"),
@@ -41,7 +42,7 @@ export const questions: Questions= [
     qb("s6n").withTitle("Zijn de klachten sterk suggestief voor een Covid infectie?").withYesNo("sf11","sf10"),
     qb("s6y").withTitle("Was de test positief?").withYesNo("s7y", "s7n"),
     qb("s7n").withTitle("Is er een vermoeden van vals negatieve test?").withYesNo("s7y","s8n"),
-    qb("s7y").withTitle("Zijn er op dit moment nog klachten aanwezig?").withYesNo("sf6","s10"),
+    qb("s7y").withTitle("Zijn er op dit moment nog klachten aanwezig?").withYesNo("s12","s10"),
     qb("s12").withYesNoRelay("r3", "sf6", "s11"),
     qb("s8n").withTitle("Heeft men een ook een hoog risico contact gehad?").withYesNo("r3", "s9n"),
     qb("s9n").withTitle("Is de patient bekwaam om te werken?").withYesNo("sf5", "sf4"),
@@ -59,23 +60,8 @@ export const questions: Questions= [
 ];
 
 export const designations: Designations = [
-    db("s3n").withDesignation("Meer informatie op sciensano.be"),
+    db("r8").withDesignation("Nadien is er een verhoogde waakzaamheid voor 4 extra dagen."),
+    db("sf2").withDesignation("Meer informatie op sciensano.be"),
     db("sy7").withDesignation("Symptomen moeten verdwenen zijn voor beëindiging van quarantaine."),
     db("s10").withDesignation("Nadien moet er nog 7 dagen ten alle tijden chirurgisch mondmasker gedragen worden en alle symptomen moeten verdwenen zijn 14 dagen na begin symptomen."),
 ];
-
-export function isQuestionId(id: QuestionId): id is QuestionId {
-    return !!questions.map(q => q.id).find(i => i === id);
-}
-
-export function findQuestion(id: QuestionId): IQuestion | undefined {
-    return questions.find(q => q.id === id);
-}
-
-export function findDesignation(id: QuestionId): Designation | undefined {
-    return designations.find(d => d.id === id);
-}
-
-export const findInitialQuestion = (): IQuestion | undefined  => {
-    return findQuestion(INITIAL_QUESTION_ID);
-};

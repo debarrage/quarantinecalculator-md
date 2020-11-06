@@ -9,5 +9,5 @@
 
 export * from "./calculator";
 export * from "./designation";
-export * from "./util";
+export * from "./utils";
 

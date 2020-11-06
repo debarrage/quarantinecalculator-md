@@ -1,11 +1,14 @@
 import { isDaysAgoResult, QuestionId, QuestionResult } from "..";
 import { IFlowState } from "../../store/reducers/flow";
 
-export class StackUtils {
-    constructor(private stack: IFlowState["stack"]) {}
+/**
+ * Utils to search the path.
+ */
+export class PathUtils {
+    constructor(private path: IFlowState["path"]) {}
 
     public find(id: QuestionId): QuestionResult {
-        const question = this.stack.find(s => s.question.id === id);
+        const question = this.tryFind(id);
         if(question) {
             return question;
         } else {
@@ -14,13 +17,15 @@ export class StackUtils {
     }
 
     public tryFind(id: QuestionId): QuestionResult | undefined {
-        try {
-            return this.find(id);
-        } catch(e) {
-            console.warn(e.messasge);
-        }
+        return this.path.find(s => s.question.id === id);
     }
     
+    /**
+     * Get the days result (number) from the path. The id must be available
+     * in the path. If not, it will throw an error.
+     * 
+     * @param id 
+     */
     public getDaysResult(id: QuestionId): number {
         const result = this.find(id);
         let days = 0;
@@ -32,6 +37,12 @@ export class StackUtils {
         return days;
     }
 
+    /**
+     * Get a yes/no result (boolean). If the question cannot be found. It returns
+     * false.
+     * 
+     * @param id 
+     */
     public getYesNoResult(id: QuestionId): boolean {
         const result = this.tryFind(id);
         if(result) {
@@ -39,10 +50,6 @@ export class StackUtils {
         }
         return false;
     }
-
-    public getReferringQuestion() {
-        if(this.stack.length >= 2) {
-            return this.stack.slice(-1)[0]
-        }
-    }
 }
+
+export const pathUtils = (path: IFlowState["path"]) => new PathUtils(path);

@@ -1,6 +1,6 @@
 import { IFlowState } from "../../store/reducers/flow";
 import { IFinalQuestion } from "../domain";
-import { StackUtils } from "./util";
+import { PathUtils, pathUtils } from "./utils";
 
 /**
  * Calculates the number of days in quarantine based on the Sciensano documentation flows
@@ -8,10 +8,10 @@ import { StackUtils } from "./util";
  */
 export class Calculator {
 
-    private stackUtils: StackUtils;
+    private utils: PathUtils;
 
-    constructor(private stack: IFlowState["stack"]) {
-        this.stackUtils = new StackUtils(stack);
+    constructor(private path: IFlowState["path"]) {
+        this.utils = pathUtils(path);
     }
 
     public calculate(final: IFinalQuestion): number {
@@ -19,38 +19,46 @@ export class Calculator {
         const { id } = final;
 
         if(id === "sf6") {
-            return this.calculateF3();
+            return this.sf6();
+        }
+
+        if(id === "rf2") {
+            return this.rf2();
         }
 
         if(id === "rf3") {
-            if(this.stackUtils.getYesNoResult("s8n")) {
-                const f2 = this.calculateF2();
-                const f3 = this.calculateF3();
+            if(this.utils.getYesNoResult("s8n")) {
+                const f2 = this.rf3();
+                const f3 = this.sf6();
 
                 return f2 > f3 ? f2 : f3;
             } else {
-                return this.calculateF2();
+                return this.rf3();
             }
         }
 
         return -1;
     }
 
-    private calculateF2(): number {
-        const isHouseMate = this.stackUtils.getYesNoResult("r3");
-        const isHouseQuarantinePossible = this.stackUtils.getYesNoResult("r8");
+    private rf2(): number {
+        return this.utils.getDaysResult("r7y") + 7;
+    }
+
+    private rf3(): number {
+        const isHouseMate = this.utils.getYesNoResult("r3");
+        const isHouseQuarantinePossible = this.utils.getYesNoResult("r8");
         if(isHouseMate) {
             if(isHouseQuarantinePossible) {
-                return this.stackUtils.getDaysResult("r9n") + 10;
+                return this.utils.getDaysResult("r9n") + 10;
             } else {
-                return this.stackUtils.getDaysResult("r4") + 17;
+                return this.utils.getDaysResult("r4") + 17;
             }
         } else {
-            return this.stackUtils.getDaysResult("r5y") + 10;
+            return this.utils.getDaysResult("r10") + 10;
         }
     }
 
-    private calculateF3(): number {
-        return this.stackUtils.getDaysResult("s3y") + 7;
+    private sf6(): number {
+        return this.utils.getDaysResult("s3y") + 7;
     }
 }

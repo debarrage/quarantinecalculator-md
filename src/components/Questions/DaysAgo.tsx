@@ -14,7 +14,7 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
     const [result, setResult] = useState<number>(0);
 
     const dispatcher = useNextQuestions();
-    const next = () => dispatcher(props.question.targets.next, result);
+    const next = () => dispatcher(result);
     
     const min = () => {
         setResult(result - 1);

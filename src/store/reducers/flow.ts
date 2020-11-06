@@ -1,49 +1,45 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { findInitialQuestion, findQuestion } from "../../core";
+import { findInitialQuestion, findNextQuestionId, findQuestion } from "../../core";
 import { IQuestion, QuestionResult } from "../../core/domain";
 import { nextQuestionAction, previousQuestionAction, resetAction } from "../actions";
 
 export interface IFlowState {
-    current?: IQuestion;
-    stack: Array<QuestionResult>;
+    current: IQuestion;
+    path: Array<QuestionResult>;
 }
 
 const INITIAL_STATE: IFlowState = {
     current: findInitialQuestion(),
-    stack: [],
+    path: [],
 }
 
 export const flow = createReducer(INITIAL_STATE, (builder) => {
     builder.addCase(resetAction, () => INITIAL_STATE);
     builder.addCase(nextQuestionAction, (state, action) => {
 
-        const { id, result } = action.payload;
+        const { result } = action.payload;
         const { current } = state;
 
-        if(current) {
+        const nextQuestion = findQuestion(findNextQuestionId(current, result));
 
-            const nextQuestion = findQuestion(id);
-
-            return {
-                current: nextQuestion,
-                stack: [...state.stack, {
-                    type: current.type,
-                    result,
-                    question: current,
-                }],
-            }
+        return {
+            current: nextQuestion,
+            path: [...state.path, {
+                type: current.type,
+                result,
+                question: current,
+            }],
         }
-        return state;
+
     });
     builder.addCase(previousQuestionAction, (state) => {
-        const { stack } = state;
-        const previous = stack.slice(-1)[0];
+        const { path } = state;
+        const previous = path.slice(-1)[0];
         if(previous) {
             return {
                 current: previous.question,
-                stack: stack.slice(0,-1),
-            }
-        }
+                path: path.slice(0,-1),
+            }        }
         return state;
     })
 });

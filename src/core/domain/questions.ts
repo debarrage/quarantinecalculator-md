@@ -9,7 +9,6 @@ export interface IQuestion {
     targets?: {[key: string]: QuestionId};
 }
 
-
 export interface INextQuestion extends IQuestion {
     type: "next";
     targets: {
