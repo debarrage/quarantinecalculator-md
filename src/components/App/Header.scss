@@ -1,12 +1,12 @@
 @import "./colors";
 
-.app__footer{
-    &.footer {    
-        background-color: lighten($footer-background, 60%);
-        color: $footer-background;
+.app__header{
+    &.header {    
+        background-color: #ffffff11;
+        color: $header-color;
         font-size: small;
         
-        [class^='footer__element'] {
+        [class^='header__element'] {
             display: inline-block;
 
             height: 5vh;
@@ -20,7 +20,7 @@
             a {
                 text-decoration: none;
                 font-weight: bold;
-                color: $footer-background !important;
+                color: $header-color !important;
             }
 
             &[class*='--left'] {

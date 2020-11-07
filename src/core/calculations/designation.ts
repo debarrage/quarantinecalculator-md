@@ -11,14 +11,13 @@ export class Designation {
     }
 
     public find(final: IFinalQuestion) {
-
         if(final.id === "sf2") {
             return findDesignation("sf2");
         }
         
         if(final.id === "sf6") {
             if(this.utils.getYesNoResult("s7y")) {
-                return findDesignation("sy7");
+                return findDesignation("s7y");
             }
 
             if(this.utils.getYesNoResult("s10")) {

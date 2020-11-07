@@ -1,4 +1,4 @@
-import { designations, IDesignation, INITIAL_QUESTION_ID, IQuestion, isDayQuestion, isNextQuestion, isYesNoQuestion, isYesNoRelayQuestion, QuestionId, QuestionResultTypes, questions } from "..";
+import { designations, IDesignation, INITIAL_QUESTION_ID, INVALID_QUESTION_ID, IQuestion, isDayQuestion, isNextQuestion, isRelayQuestion, isYesNoQuestion, QuestionId, QuestionResultTypes, questions } from "..";
 
 export function isQuestionId(id: QuestionId): id is QuestionId {
     return !!questions.map(q => q.id).find(i => i === id);
@@ -16,16 +16,30 @@ export function findDesignation(id: QuestionId): IDesignation | undefined {
     return designations.find(d => d.id === id);
 }
 
-export const findInitialQuestion = (): IQuestion  => {
+export function findInitialQuestion() {
     return findQuestion(INITIAL_QUESTION_ID);
-};
+}
 
-export const findNextQuestionId = (current: IQuestion, result: QuestionResultTypes) => {
-    if(isYesNoQuestion(current) || isYesNoRelayQuestion(current)) {
+/**
+ * Find the next question id
+ * @param current 
+ * @param result 
+ */
+export function findNextQuestionId(current: IQuestion, result: QuestionResultTypes) {
+    if(isYesNoQuestion(current) || isRelayQuestion(current)) {
         return result ? current.targets.yes : current.targets.no;
     } else if(current && (isNextQuestion(current) || isDayQuestion(current))) {
         return current.targets.next;
     } 
     
-    return "not-found";
+    return INVALID_QUESTION_ID;
+}
+
+/**
+ * Find the next question in the tree
+ * @param question 
+ * @param result 
+ */
+export function findNextQuestion(question: IQuestion, result: QuestionResultTypes) {
+    return findQuestion(findNextQuestionId(question, result));
 }
