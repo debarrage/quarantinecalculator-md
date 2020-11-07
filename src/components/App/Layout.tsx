@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { initDoneAction } from "../../store/actions";
-import { Footer } from "./Footer";
+import { Header } from "./Header";
 import { useWindowSize } from "./hooks/useWindowSize";
 import "./Layout.scss";
 
@@ -23,10 +23,10 @@ export const Layout: React.FC = (props) => {
 
     return (
         <div className="app" style={{ width: `${width}px`, height: `${height}px` }}>
+            <Header/>
             <div className="app__body">
                 {props.children}
             </div>
-            <Footer/>
         </div>
     )
 };
