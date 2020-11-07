@@ -1,11 +1,12 @@
 import { createReducer } from "@reduxjs/toolkit";
+import { QuestionId } from "../../core";
 import { resetAction } from "../actions";
-import { setCalculatorResultAction, setQuarantineDesignationAction } from "../actions/calculator";
+import { setQuarantineDaysAction, setQuarantineDesignationAction } from "../actions/quarantine.actions";
 
 
 export interface IQuarantineState {
     days: number;
-    designation?: string;
+    designation?: QuestionId;
 }
 
 const INITIAL_STATE: IQuarantineState = {
@@ -13,7 +14,7 @@ const INITIAL_STATE: IQuarantineState = {
 }
 
 export const quarantine = createReducer(INITIAL_STATE, (builder) => {
-    builder.addCase(setCalculatorResultAction,
+    builder.addCase(setQuarantineDaysAction,
         (state, action) => ({ ...state, days: action.payload }));
     
     builder.addCase(setQuarantineDesignationAction,

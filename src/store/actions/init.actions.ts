@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { createActionName } from "./util";
+import { createActionName } from "./helpers";
 
 const actionGroup = "application";
 const actionName = createActionName(actionGroup);

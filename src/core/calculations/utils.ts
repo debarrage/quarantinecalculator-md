@@ -30,7 +30,7 @@ export class PathUtils {
         const result = this.find(id);
         let days = 0;
         if(isDaysAgoResult(result)) {
-            days = result.result || 0;
+            days = result.value || 0;
         } else {
             console.warn(`Question ${id} is not of type DaysAgoResult`)
         }   
@@ -46,7 +46,7 @@ export class PathUtils {
     public getYesNoResult(id: QuestionId): boolean {
         const result = this.tryFind(id);
         if(result) {
-            return !!result.result;
+            return !!result.value;
         }
         return false;
     }

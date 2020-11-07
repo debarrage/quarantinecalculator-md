@@ -1,9 +1,9 @@
 import { createAction } from "@reduxjs/toolkit";
 import { QuestionId } from "../../core";
-import { createActionName } from "./util";
+import { createActionName } from "./helpers";
 
-const actionGroup = "calculator";
+const actionGroup = "quarantine";
 const actionName = createActionName(actionGroup);
 
-export const setCalculatorResultAction = createAction<number>(actionName("set"));
+export const setQuarantineDaysAction = createAction<number>(actionName("set"));
 export const setQuarantineDesignationAction = createAction<QuestionId>(actionName("set designation"));

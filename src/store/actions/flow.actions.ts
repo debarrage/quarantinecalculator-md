@@ -1,6 +1,6 @@
 import { Action, createAction } from "@reduxjs/toolkit";
 import { QuestionResultTypes } from "../../core/domain";
-import { createActionName } from "./util";
+import { createActionName } from "./helpers";
 
 const actionGroup = "flow";
 const actionName = createActionName(actionGroup);

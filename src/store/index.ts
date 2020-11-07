@@ -1,8 +1,6 @@
 import { applyMiddleware, compose, createStore, StoreEnhancer } from "redux";
+import { calculator, haptics, relay } from "./middleware";
 import { rootReducer } from "./reducers";
-import { calculator } from "./reducers/middleware/calculator";
-import { haptics } from "./reducers/middleware/haptics";
-import { relay } from "./reducers/middleware/relay";
 
 // Declare global type for the redux devtools
 declare global {
@@ -11,9 +9,17 @@ declare global {
     }
 }
 
+// Define the middleware, order is important
+const middleware = applyMiddleware(
+    haptics, 
+    relay, 
+    calculator
+);
+
+// Create an init store method
 export const initStore = () => {
     return createStore(
         rootReducer,
-        (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(applyMiddleware(haptics, relay, calculator))
+        (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)(middleware)
     );
 };
