@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import * as App from "./components/App";
 import { initStore } from "./store";
+import { initializeTelemetry } from "./telemetry";
 
 const QuarantineCalculator: React.FC = () => {
     const store = initStore();
@@ -21,3 +22,6 @@ ReactDOM.render(<QuarantineCalculator />, window.document.getElementById("root")
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 // serviceWorker.register();
+
+// Initialize telemetry
+initializeTelemetry();

@@ -20,6 +20,7 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
+    "@microsoft/applicationinsights-web": "^2.5.9",
     "@primer/octicons-react": "^11.0.0",
     "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -70,6 +71,8 @@
         "statements": 90
       }
     },
-    "coverageReporters": ["text"]
+    "coverageReporters": [
+      "text"
+    ]
   }
 }
