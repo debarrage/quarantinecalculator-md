@@ -17,12 +17,12 @@ export const Header: React.FC = () => {
                 </span>
             </div>
             <div className="header__element--right">
-                <a href="not-implemented">
+                <a href={process.env.REACT_APP_PRIVACY_URL}>
                     Privacy
                 </a>
             </div>
             <div className="header__element--right">
-                <a href="https://github.com/debarrage/quarantinecalculator-md/issues">
+                <a href={process.env.REACT_APP_ISSUE_URL}>
                     Probleem melden
                 </a>
             </div>
