@@ -51,6 +51,7 @@ stages:
             export NODE_ENV=$(Build.SourceBranchName)
             export REACT_APP_ENVIRONMENT=$(Build.SourceBranchName)
             export REACT_APP_VERSION=$(Build.BuildNumber)
+            export REACT_APP_INSTRUMENTATION_KEY=$(REACT_APP_INSTRUMENTATION_KEY)
             npm i && npm run build
       
       - task: Docker@2
