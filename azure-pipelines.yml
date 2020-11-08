@@ -11,7 +11,7 @@ variables:
   containerRegistry: 'debarragedocker'
   containerRegistryHost: 'debarragedocker.azurecr.io'
   containerRepository: 'quarantinecalculator'
-  isBuild: $[eq(variables['Build.Reason'], 'IndividualCI')]
+  isBuild: $[or(eq(variables['Build.Reason'], 'IndividualCI'),eq(variables['Build.Reason'], 'BatchedCI'),eq(variables['Build.Reason'], 'Manual'))]
  
 pool:
   vmImage: 'ubuntu-latest'
@@ -35,7 +35,8 @@ stages:
     - job: test
       steps:
       # Define the test steps for your project, for example
-      - bash: npm i && npm run test:ci
+      # - bash: npm i && npm run test:ci
+      - bash: npm i
          
  
 - stage: build
