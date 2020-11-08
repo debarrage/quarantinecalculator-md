@@ -2,10 +2,10 @@
 
 exports[`Base Layout classes Renders footer 1`] = `
 <div
-  className="app__footer footer"
+  className="app__header header"
 >
   <div
-    className="footer__element--left"
+    className="header__element--left"
   >
     <a
       href="https://github.com/debarrage/quarantinecalculator-md"
@@ -40,16 +40,16 @@ exports[`Base Layout classes Renders footer 1`] = `
     </span>
   </div>
   <div
-    className="footer__element--right"
+    className="header__element--right"
   >
     <a
-      href="not-implemented"
+      href="https://debarrage.github.io/quarantinecalculator-md/privacy.html"
     >
       Privacy
     </a>
   </div>
   <div
-    className="footer__element--right"
+    className="header__element--right"
   >
     <a
       href="https://github.com/debarrage/quarantinecalculator-md/issues"
@@ -71,13 +71,10 @@ exports[`Base Layout classes Renders layout 1`] = `
   }
 >
   <div
-    className="app__body"
-  />
-  <div
-    className="app__footer footer"
+    className="app__header header"
   >
     <div
-      className="footer__element--left"
+      className="header__element--left"
     >
       <a
         href="https://github.com/debarrage/quarantinecalculator-md"
@@ -112,16 +109,16 @@ exports[`Base Layout classes Renders layout 1`] = `
       </span>
     </div>
     <div
-      className="footer__element--right"
+      className="header__element--right"
     >
       <a
-        href="not-implemented"
+        href="https://debarrage.github.io/quarantinecalculator-md/privacy.html"
       >
         Privacy
       </a>
     </div>
     <div
-      className="footer__element--right"
+      className="header__element--right"
     >
       <a
         href="https://github.com/debarrage/quarantinecalculator-md/issues"
@@ -130,5 +127,8 @@ exports[`Base Layout classes Renders layout 1`] = `
       </a>
     </div>
   </div>
+  <div
+    className="app__body"
+  />
 </div>
 `;

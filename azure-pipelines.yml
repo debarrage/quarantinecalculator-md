@@ -1,7 +1,10 @@
 # Define the main branches as trigger
 trigger:
-  - main
-  - development
+  batch: true
+  branches:
+    include:
+      - main
+      - development
    
 variables:
   containerName: 'md'
@@ -32,7 +35,7 @@ stages:
     - job: test
       steps:
       # Define the test steps for your project, for example
-      - bash: npm i && npm run test
+      - bash: npm i && npm run test:ci
          
  
 - stage: build
