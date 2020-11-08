@@ -32,7 +32,7 @@ stages:
     - job: test
       steps:
       # Define the test steps for your project, for example
-      - bash: npm i
+      - bash: npm i && npm run test
          
  
 - stage: build
