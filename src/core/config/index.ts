@@ -28,11 +28,11 @@ export const questions: Questions= [
     q("r7y").title("Wanneer is de test gedaan?").daysAgo("rf2"),
     q("r8").title("Is het mogelijk binnenshuis quarantaine te creëeren?").yesNo("r9n", "rf3"),
     q("r9n").title("Vanaf welke datum?").daysAgo("rf3"),
-    q("rf3").title("Quarantaine tot het resultaat gekend is.").final(),
+    q("rf3").title("Aantal dagen quarantaine:").final(),
     
     // Final answers r-tree
     q("rf1").title("Geen quarantaine nodig").final(),
-    q("rf2").title("Aantal dagen quarantaine").final(),
+    q("rf2").title("Aantal dagen quarantaine:").final(),
     
     // Questions s-tree 
     q("s1").title("Vertoont de patiënt ernstige symptomen?").yesNo("sf1", "s11"),
