@@ -1,0 +1,16 @@
+$help-padding: 3rem;
+
+.question__help {
+    &.help {
+        margin: $help-padding;
+        .help__content {
+            background-color: #ffffff22;
+            border-radius: $help-padding/5;
+            padding: $help-padding;
+            
+            .octicon {
+                margin: 0 5px;
+            }
+        }
+    }
+}
