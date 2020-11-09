@@ -24,13 +24,6 @@ stages:
   - job: version
     displayName: 'Determine Version'
     steps:
-    - task: Cache@2
-      inputs:
-        key: 'npm | "$(Agent.OS)" | package-lock.json'
-        restoreKeys: |
-           npm | "$(Agent.OS)"
-        path: $(npmConfigCache)
-      displayName: Cache npm
     - bash: |
         VERSION=$(git describe --long --always)
         echo "##vso[build.updatebuildnumber]$VERSION"
