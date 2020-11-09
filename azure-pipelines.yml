@@ -12,6 +12,7 @@ variables:
   containerRegistryHost: 'debarragedocker.azurecr.io'
   containerRepository: 'quarantinecalculator'
   isBuild: $[or(eq(variables['Build.Reason'], 'IndividualCI'),eq(variables['Build.Reason'], 'BatchedCI'),eq(variables['Build.Reason'], 'Manual'))]
+  npmConfigCache: $(Pipeline.Workspace)/.npm
  
 pool:
   vmImage: 'ubuntu-latest'
@@ -23,6 +24,13 @@ stages:
   - job: version
     displayName: 'Determine Version'
     steps:
+    - task: Cache@2
+      inputs:
+        key: 'npm | "$(Agent.OS)" | package-lock.json'
+        restoreKeys: |
+           npm | "$(Agent.OS)"
+        path: $(npmConfigCache)
+      displayName: Cache npm
     - bash: |
         VERSION=$(git describe --long --always)
         echo "##vso[build.updatebuildnumber]$VERSION"
@@ -34,6 +42,12 @@ stages:
   jobs:
     - job: test
       steps:
+      - task: Cache@2
+        inputs:
+          key: 'npm | "$(Agent.OS)" | package-lock.json'
+          restoreKeys: |
+             npm | "$(Agent.OS)"
+          path: $(npmConfigCache)
       # Define the test steps for your project, for example
       # - bash: npm i && npm run test:ci
       - bash: npm i
@@ -46,7 +60,13 @@ stages:
     - job: build
       displayName: "build"
       condition: and(succeeded(), eq(variables.isBuild, true))
-      steps:      
+      steps: 
+      - task: Cache@2
+        inputs:
+          key: 'npm | "$(Agent.OS)" | package-lock.json'
+          restoreKeys: |
+             npm | "$(Agent.OS)"
+          path: $(npmConfigCache)     
       - task: Bash@3
         displayName: 'Build App'
         inputs:
