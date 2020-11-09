@@ -52,6 +52,10 @@ $title-font-size: 5vh;
                     min-height: 5vh;
                 }
             }
+
+        }
+        .question__footer {
+            justify-content: flex-end;
         }
     }
 }
