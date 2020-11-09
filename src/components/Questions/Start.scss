@@ -1,4 +1,4 @@
-$help-padding: 3rem;
+$help-padding: 2rem;
 
 .question__help {
     &.help {
@@ -7,9 +7,12 @@ $help-padding: 3rem;
             background-color: #ffffff22;
             border-radius: $help-padding/5;
             padding: $help-padding;
+            font-size: 0.8rem;
+            line-height: 1rem;
             
             .octicon {
                 margin: 0 5px;
+                height: 0.8rem;
             }
         }
     }
