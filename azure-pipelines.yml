@@ -35,12 +35,12 @@ stages:
   jobs:
     - job: test
       steps:
-      - task: Cache@2
-        inputs:
-          key: 'npm | "$(Agent.OS)" | package-lock.json'
-          restoreKeys: |
-             npm | "$(Agent.OS)"
-          path: $(npmConfigCache)
+      # - task: Cache@2
+      #   inputs:
+      #     key: 'npm | "$(Agent.OS)" | package-lock.json'
+      #     restoreKeys: |
+      #        npm | "$(Agent.OS)"
+      #     path: $(npmConfigCache)
       # Define the test steps for your project, for example
       # - bash: npm i && npm run test:ci
       - bash: npm i
@@ -54,12 +54,12 @@ stages:
       displayName: "build"
       condition: and(succeeded(), eq(variables.isBuild, true))
       steps: 
-      - task: Cache@2
-        inputs:
-          key: 'npm | "$(Agent.OS)" | package-lock.json'
-          restoreKeys: |
-             npm | "$(Agent.OS)"
-          path: $(npmConfigCache)     
+      # - task: Cache@2
+      #   inputs:
+      #     key: 'npm | "$(Agent.OS)" | package-lock.json'
+      #     restoreKeys: |
+      #        npm | "$(Agent.OS)"
+      #     path: $(npmConfigCache)     
       - task: Bash@3
         displayName: 'Build App'
         inputs:
