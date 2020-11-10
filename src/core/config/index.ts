@@ -1,6 +1,7 @@
 import { Designations, QuestionId, Questions } from "../domain";
 import { DesignationBuilder, QuestionBuilder } from "./builder";
 export * from "./builder";
+export * from "./date";
 export * from "./helpers";
 
 export const INITIAL_QUESTION_ID: QuestionId = "0";

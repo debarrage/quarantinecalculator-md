@@ -3,6 +3,7 @@ import classNames from "classnames";
 import dayjs from "dayjs";
 import React, { useState } from "react";
 import { QuestionProps } from ".";
+import { DATE_FORMAT } from "../../core";
 import { IDaysAgoQuestion } from "../../core/domain";
 import * as Buttons from "./Button";
 import "./DaysAgo.scss";
@@ -41,7 +42,7 @@ export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
                         {Math.abs(result)}
                     </span>
                     <span className="daysago__dateresult">
-                        {dayjs().add(result, "day").format("DD-MM-YYYY")}
+                        {dayjs().add(result, "day").format(DATE_FORMAT)}
                     </span>
                 </div>
                 <div className="daysago__min" onClick={min}>

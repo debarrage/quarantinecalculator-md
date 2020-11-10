@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import React from "react";
 import { useSelector } from "react-redux";
 import { QuestionProps } from ".";
-import { findDesignation } from "../../core";
+import { DATE_FORMAT, findDesignation } from "../../core";
 import { IFinalQuestion } from "../../core/domain";
 import { IQuarantineState } from "../../store/reducers/quarantine";
 import { IApplicationState } from "../../store/state";
@@ -30,7 +30,7 @@ export const Final: React.FC<QuestionProps<IFinalQuestion>> = (props) => {
                                 </div>
                                 <div className="final__date">
                                     <span className="text">Tot:</span>
-                                    <span className="text">{dayjs().add(days, "day").format("DD-MM-YYYY")}</span>
+                                    <span className="text">{dayjs().add(days, "day").format(DATE_FORMAT)}</span>
                                 </div>
                             </>
                         )}
