@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button classes Should render generic button 1`] = `
+<div
+  className="buttons__button buttons__test"
+  onClick={[Function]}
+/>
+`;
