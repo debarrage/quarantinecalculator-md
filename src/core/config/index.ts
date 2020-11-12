@@ -49,7 +49,8 @@ export const questions: Questions= [
     q("s6y").title("Was de test positief?").yesNo("s7y", "s7n"),
     q("s7n").title("Is er een vermoeden van vals negatieve test?").yesNo("s7y","s8n"),
     q("s7y").title("Zijn er op dit moment nog klachten aanwezig?").yesNo("s12","s10"),
-    q("s12").relay("r3", "sf6", "s11"),
+    q("s12").relay("s13", "sf6", "s11"),
+    q("s13").title("Nu volgen enkele vragen omtrent het hoog risico contact...").next("r3"),
     q("s8n").title("Is er ook een hoog risico contact geweest?").yesNo("r3", "s9n"),
     q("s9n").title("Is de patient bekwaam om te werken?").yesNo("sf5", "sf4"),
     
