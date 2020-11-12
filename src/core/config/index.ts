@@ -37,7 +37,7 @@ export const questions: Questions= [
     
     // Questions s-tree 
     q("s1").title("Vertoont de patiënt ernstige symptomen?").yesNo("sf1", "s11"),
-    q("s11").title("Heeft men hoog risico contact gehad?").yesNo("s2n","s2n"),
+    q("s11").title("Is er een hoog risico conrtact geweest met een bevestigd covid geval? Of komt de patient uit een rode zone?").yesNo("s2n","s2n"),
     q("s10").title("Is de patiënt werkzaam in de zorg?").yesNo("s12","s12"),
     q("s2n").title("Is de patiënt ouder dan 6 jaar?").yesNo("s3y","s3n"),
     q("s3n").title("Is er een indicatie om te testen om bijvoorbeeld een ernstig ziek familie lid te beschermen?").yesNo("sf2","sf3"),
