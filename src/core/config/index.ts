@@ -14,14 +14,14 @@ const d = (id: QuestionId): DesignationBuilder => new DesignationBuilder(id);
 export const questions: Questions= [
     // Introduction and main question
     q(INITIAL_QUESTION_ID).title("Klik op 'Volgende' om de Covid Calculator te starten").next("1"),
-    q("1").title("Is de patient symptomatisch? Voldoet hij aan de gevalsdefinitie?").yesNo("s1","r1"),
+    q("1").title("Is de patiënt symptomatisch? Voldoet hij aan de gevalsdefinitie?").yesNo("s1","r1"),
     
     // Questions r-tree
-    q("r1").title("Is er een hoog risico contact geweest met een bevestigd covid geval? Of komt de patient uit een rode zone?").yesNo("r2y", "r11n"),
+    q("r1").title("Is er een hoog risico contact geweest met een bevestigd covid geval? Of komt de patiënt uit een rode zone?").yesNo("r2y", "r11n"),
     q("r10").title("Wanneer is het laatste risicocontact geweest?").daysAgo("rf3"),
     q("r11n").title("Is er een andere indicatie om toch te testen?").yesNo("r5y", "rf1"),
-    q("r2n").title("Heeft de patient in de afgelopen 2 maanden een positieve test (PCR) gehad?").yesNo("rf1", "r11n"),
-    q("r2y").title("Heeft de patient in de afgelopen 2 maanden een positieve test (PCR) gehad?").yesNo("rf1", "r3"),
+    q("r2n").title("Heeft de patiënt in de afgelopen 2 maanden een positieve test (PCR) gehad?").yesNo("rf1", "r11n"),
+    q("r2y").title("Heeft de patiënt in de afgelopen 2 maanden een positieve test (PCR) gehad?").yesNo("rf1", "r3"),
     q("r3").title("Is het een huisgenoot?").yesNo("r4", "r10"),
     q("r4").title("Sinds wanneer is de huisgenoot symptomatisch?").daysAgo("r8"),
     q("r5y").title("Is de uitkomst reeds gekend?").yesNo("r6y", "rf3"),
@@ -37,14 +37,14 @@ export const questions: Questions= [
     
     // Questions s-tree 
     q("s1").title("Vertoont de patiënt ernstige symptomen?").yesNo("sf1", "s11"),
-    q("s11").title("Is er een hoog risico conrtact geweest met een bevestigd covid geval? Of komt de patient uit een rode zone?").yesNo("s2n","s2n"),
+    q("s11").title("Is er een hoog risico contact geweest met een bevestigd covid geval? Of komt de patiënt uit een rode zone?").yesNo("s2n","s2n"),
     q("s10").title("Is de patiënt werkzaam in de zorg?").yesNo("s12","s12"),
     q("s2n").title("Is de patiënt ouder dan 6 jaar?").yesNo("s3y","s3n"),
     q("s3n").title("Is er een indicatie om te testen om bijvoorbeeld een ernstig ziek familie lid te beschermen?").yesNo("sf2","sf3"),
     q("s3y").title("Wanneer zijn de klachten begonnen?").daysAgo("s4"),
     q("s4").title("Is er een test gedaan?").yesNo("s5y", "s5n"),
     q("s5n").title("Is er een reden om niet te testen?").yesNo("s10","s13n"),
-    q("s13n").title("Zijn de klachten sterk siggestief voor een Covid infectie?").yesNo("sf9", "sf12"),
+    q("s13n").title("Zijn de klachten sterk suggestief voor een Covid infectie?").yesNo("sf9", "sf12"),
     q("s5y").title("Is de uitkomst reeds gekend?").yesNo("s6y", "s6n"),
     q("s6n").title("Zijn de klachten sterk suggestief voor een Covid infectie?").yesNo("sf11","sf10"),
     q("s6y").title("Was de test positief?").yesNo("s7y", "s7n"),
@@ -53,7 +53,7 @@ export const questions: Questions= [
     q("s12").relay("s13", "sf6", "s11"),
     q("s13").title("Nu volgen enkele vragen omtrent het hoog risico contact...").next("r3"),
     q("s8n").relay("s13", "s9n", "s11"),
-    q("s9n").title("Is de patient bekwaam om te werken?").yesNo("sf5", "sf4"),
+    q("s9n").title("Is de patiënt bekwaam om te werken?").yesNo("sf5", "sf4"),
     
     // Final answers s-tree
     q("sf1").title("Verwijs een patiënt met ernstige symptomen naar het ziekenhuis.").final(),
