@@ -93,10 +93,10 @@ ingress:
 # node runs out of resources. 
 resources:
   limits:
-    memory: 512Mi
+    memory: 125Mi
   requests:
-    cpu: 200m
-    memory: 512Mi
+    cpu: 100m
+    memory: 125Mi
 
 # Enable prometheus style scraping
 # See also: https://docs.microsoft.com/nl-nl/azure/azure-monitor/insights/container-insights-prometheus-integration
