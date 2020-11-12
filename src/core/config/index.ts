@@ -51,7 +51,7 @@ export const questions: Questions= [
     q("s7y").title("Zijn er op dit moment nog klachten aanwezig?").yesNo("s12","s10"),
     q("s12").relay("s13", "sf6", "s11"),
     q("s13").title("Nu volgen enkele vragen omtrent het hoog risico contact...").next("r3"),
-    q("s8n").title("Is er ook een hoog risico contact geweest?").yesNo("r3", "s9n"),
+    q("s8n").relay("s13", "s9n", "s11"),
     q("s9n").title("Is de patient bekwaam om te werken?").yesNo("sf5", "sf4"),
     
     // Final answers s-tree
