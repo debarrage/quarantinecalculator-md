@@ -38,7 +38,7 @@ export const questions: Questions= [
     // Questions s-tree 
     q("s1").title("Vertoont de patiënt ernstige symptomen?").yesNo("sf1", "s11"),
     q("s11").title("Heeft men hoog risico contact gehad?").yesNo("s2n","s2n"),
-    q("s10").title("Zorgpersoneel?").yesNo("s12","s12"),
+    q("s10").title("Is de patiënt werkzaam in de zorg?").yesNo("s12","s12"),
     q("s2n").title("Is de patiënt ouder dan 6 jaar?").yesNo("s3y","s3n"),
     q("s3n").title("Is er een indicatie om te testen om bijvoorbeeld een ernstig ziek familie lid te beschermen?").yesNo("sf2","sf3"),
     q("s3y").title("Wanneer zijn de klachten begonnen?").daysAgo("s4"),
@@ -50,18 +50,18 @@ export const questions: Questions= [
     q("s7n").title("Is er een vermoeden van vals negatieve test?").yesNo("s7y","s8n"),
     q("s7y").title("Zijn er op dit moment nog klachten aanwezig?").yesNo("s12","s10"),
     q("s12").relay("r3", "sf6", "s11"),
-    q("s8n").title("Heeft men een ook een hoog risico contact gehad?").yesNo("r3", "s9n"),
+    q("s8n").title("Is er ook een hoog risico contact geweest?").yesNo("r3", "s9n"),
     q("s9n").title("Is de patient bekwaam om te werken?").yesNo("sf5", "sf4"),
     
     // Final answers s-tree
     q("sf1").title("Verwijs de patiënt naar het ziekenhuis").final(),
     q("sf2").title("Zie procedure voor kinderen.").final(),
     q("sf3").title("Schijf het kind ziek voor de vermoedelijke ziekteperiode").final(),
-    q("sf4").title("Schrijf patiënt ziek zo lan g deze werkonbekwaam is").final(),
+    q("sf4").title("Schrijf patiënt ziek zo lang deze werkonbekwaam is").final(),
     q("sf5").title("Quarantaine beëindigd").final(),
     q("sf6").title("Aantal dagen quarantaine:").final(),
-    q("sf9").title("Vraag een PCR test aan. Patiënt in quarantaine tot resultaat gekend is").final(),
-    q("sf10").title("Quarantaine tot resultaat gekend is. Huisgenoten ook in quarantaine").final(),
+    q("sf9").title("Vraag een PCR test aan. Patiënt blijft in quarantaine tot resultaat gekend is").final(),
+    q("sf10").title("Quarantaine tot resultaat gekend is. Huisgenoten gaan ook in quarantaine").final(),
     q("sf11").title("Quarantaine tot het resultaat gekend is").final()
 ];
 
