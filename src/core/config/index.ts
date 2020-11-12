@@ -37,7 +37,7 @@ export const questions: Questions= [
     
     // Questions s-tree 
     q("s1").title("Vertoont de patiënt ernstige symptomen?").yesNo("sf1", "s11"),
-    q("s11").title("Heeft men hoog risico contact gehad?").yesNo("s2n","s2n"),
+    q("s11").title("Is er een hoog risico conrtact geweest met een bevestigd covid geval? Of komt de patient uit een rode zone?").yesNo("s2n","s2n"),
     q("s10").title("Is de patiënt werkzaam in de zorg?").yesNo("s12","s12"),
     q("s2n").title("Is de patiënt ouder dan 6 jaar?").yesNo("s3y","s3n"),
     q("s3n").title("Is er een indicatie om te testen om bijvoorbeeld een ernstig ziek familie lid te beschermen?").yesNo("sf2","sf3"),
@@ -51,7 +51,7 @@ export const questions: Questions= [
     q("s7y").title("Zijn er op dit moment nog klachten aanwezig?").yesNo("s12","s10"),
     q("s12").relay("s13", "sf6", "s11"),
     q("s13").title("Nu volgen enkele vragen omtrent het hoog risico contact...").next("r3"),
-    q("s8n").title("Is er ook een hoog risico contact geweest?").yesNo("r3", "s9n"),
+    q("s8n").relay("s13", "s9n", "s11"),
     q("s9n").title("Is de patient bekwaam om te werken?").yesNo("sf5", "sf4"),
     
     // Final answers s-tree
