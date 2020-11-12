@@ -43,7 +43,8 @@ export const questions: Questions= [
     q("s3n").title("Is er een indicatie om te testen om bijvoorbeeld een ernstig ziek familie lid te beschermen?").yesNo("sf2","sf3"),
     q("s3y").title("Wanneer zijn de klachten begonnen?").daysAgo("s4"),
     q("s4").title("Is er een test gedaan?").yesNo("s5y", "s5n"),
-    q("s5n").title("Is er een reden om niet te testen?").yesNo("s10","sf9"),
+    q("s5n").title("Is er een reden om niet te testen?").yesNo("s10","s13n"),
+    q("s13n").title("Zijn de klachten sterk siggestief voor een Covid infectie?").yesNo("sf9", "sf12"),
     q("s5y").title("Is de uitkomst reeds gekend?").yesNo("s6y", "s6n"),
     q("s6n").title("Zijn de klachten sterk suggestief voor een Covid infectie?").yesNo("sf11","sf10"),
     q("s6y").title("Was de test positief?").yesNo("s7y", "s7n"),
@@ -61,9 +62,10 @@ export const questions: Questions= [
     q("sf4").title("Schrijf patiënt ziek zo lang deze werkonbekwaam is.").final(),
     q("sf5").title("Quarantaine beëindigd.").final(),
     q("sf6").title("Aantal dagen quarantaine:").final(),
-    q("sf9").title("Vraag een PCR test aan. Patiënt blijft in quarantaine tot resultaat gekend is.").final(),
+    q("sf9").title("Vraag een PCR test aan. Patiënt in quarantaine tot resultaat gekend is. Huisgenoten ook in quarantaine.").final(),
     q("sf10").title("Quarantaine tot resultaat gekend is. Huisgenoten gaan ook in quarantaine.").final(),
-    q("sf11").title("Quarantaine tot het resultaat gekend is.").final()
+    q("sf11").title("Quarantaine tot het resultaat gekend is.").final(),
+    q("sf12").title("Vraag een PCR test aan. Patiënt in quarantaine tot resultaat gekend is. Huisgenoten niet in quarantaine.").final(),
 ];
 
 export const designations: Designations = [
