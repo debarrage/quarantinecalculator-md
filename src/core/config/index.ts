@@ -13,7 +13,7 @@ const d = (id: QuestionId): DesignationBuilder => new DesignationBuilder(id);
 
 export const questions: Questions= [
     // Introduction and main question
-    q(INITIAL_QUESTION_ID).title("Klik op 'Volgende' om de Covid Calculator te starten").next("1"),
+    q(INITIAL_QUESTION_ID).title("Klik op 'Volgende' om de Covid Quarantaine Calculator te starten").next("1"),
     q("1").title("Is de patiënt symptomatisch? Voldoet hij aan de gevalsdefinitie?").yesNo("s1","r1"),
     
     // Questions r-tree
