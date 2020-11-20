@@ -58,7 +58,7 @@ export const questions: Questions= [
     // Final answers s-tree
     q("sf1").title("Verwijs een patiënt met ernstige symptomen naar het ziekenhuis.").final(),
     q("sf2").title("Zie procedure voor kinderen.").final(),
-    q("sf3").title("Schijf het kind ziek voor de vermoedelijke ziekteperiode.").final(),
+    q("sf3").title("Schrijf het kind ziek voor de vermoedelijke ziekteperiode.").final(),
     q("sf4").title("Schrijf patiënt ziek zo lang deze werkonbekwaam is.").final(),
     q("sf5").title("Quarantaine beëindigd.").final(),
     q("sf6").title("Aantal dagen quarantaine:").final(),
