@@ -4,6 +4,10 @@ export * from "./builder";
 export * from "./date";
 export * from "./helpers";
 
+// Configure rule engine version date: i.e. the date indicating the validity from Sciensano
+export const CURRENT_RULESET_VERSION = "23/11/2020";
+
+// Configure common question ids
 export const INITIAL_QUESTION_ID: QuestionId = "0";
 export const INVALID_QUESTION_ID: QuestionId = "invalid-id";
 
