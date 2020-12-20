@@ -12,7 +12,8 @@ export const Start: React.FC<QuestionProps<INextQuestion>> = (props) => {
         <Next {...props}>
             <div className="question__help help">
                 <div className="help__content">
-                    Gebaseerd op Sciensano richtlijnen van {CURRENT_RULESET_VERSION}
+                    Gebaseerd op Sciensano richtlijnen van {CURRENT_RULESET_VERSION}. <br/>
+                    Uiteindelijke quarantaine wordt bepaald door een gezondheidsmedewerker.
                 </div>
                 <div className="help__content">
                     Gebruik de onderstaande knoppen
