@@ -29,12 +29,12 @@ export const questions: Questions= [
     // Questions r-tree
     q("r1").title("Is er een hoog risico contact geweest met een bevestigd covid geval? Of komt de patiënt uit een rode zone?").yesNo("r2y", "r11n"),
     q("r10").title("Wanneer is het laatste risicocontact geweest?").daysAgo("rf3"),
-    q("r11n").title("Is er een andere indicatie om toch te testen?").yesNo("r5y", "rf1"),
+    q("r11n").title("Is er een andere indicatie om toch te testen (Ziekenhuis opname nieuwe bewoner zorgcollectiviteit?)").yesNo("r5y", "rf1"),
     q("r2n").title("Heeft de patiënt in de afgelopen 2 maanden een positieve test (PCR) gehad?").yesNo("rf1", "r11n"),
     q("r2y").title("Heeft de patiënt in de afgelopen 2 maanden een positieve test (PCR) gehad?").yesNo("rf1", "r3"),
     q("r3").title("Is het een huisgenoot?").yesNo("r4", "r10"),
     q("r4").title("Sinds wanneer is de huisgenoot symptomatisch?").daysAgo("r8"),
-    q("r5y").title("Is de uitkomst reeds gekend?").yesNo("r6y", "rf3"),
+    q("r5y").title("Is de uitkomst reeds gekend?").yesNo("r6y", "rf5"),
     q("r6y").title("Was de test positief?").yesNo("r7y", "rf1"),
     q("r7y").title("Wanneer is de test gedaan?").daysAgo("rf2"),
     q("r8").title("Is het mogelijk binnenshuis quarantaine te creëeren?").yesNo("r9n", "rf3"),
@@ -44,6 +44,7 @@ export const questions: Questions= [
 
     q("rf3").title("Aantal dagen quarantaine:").final(),
     q("rf4").title("Aantal dagen quarantaine:").final(),
+    q("rf5").title("Quarantaine tot het reaultaat gekend is.").final(),
     
     // Final answers r-tree
     q("rf1").title("Geen quarantaine nodig").final(),
@@ -87,5 +88,5 @@ export const designations: Designations = [
     d("sf2").text("Meer informatie op sciensano.be"),
     d("s7y").text("Symptomen moeten verdwenen zijn voor beëindiging van quarantaine."),
     d("s10").text("Nadien moet er nog 7 dagen ten alle tijden chirurgisch mondmasker gedragen worden en alle symptomen moeten verdwenen zijn 14 dagen na begin symptomen."),
-    d("r12").text("Testen op 7 dagen. Indien de patiënt niet wil of kan getest worden quarantaine van 10 dagen, en 14 dagen verhoogde waakzaamhid."),
+    d("rf4").text("Testen op 7 dagen. Indien de patiënt niet wil of kan getest worden quarantaine van 10 dagen, en 14 dagen verhoogde waakzaamhid."),
 ];

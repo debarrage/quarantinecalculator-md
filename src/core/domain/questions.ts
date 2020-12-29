@@ -3,7 +3,7 @@ import { INextTarget, IOptionsTarget, ITarget, IYesNoTarget } from "./targets";
 /**
  * List of all the arrays
  */
-export type QuestionId = "invalid-id" | "0" | "1" | "r1" | "r10" | "r11n" | "r11" | "r12" | "r2n" | "r2y" | "r3" | "r4" | "r5y" | "r6y" | "r7y" | "r8" | "r9n" | "rf3" | "rf4" | "rf1" | "rf2" | "s1" | "s11" | "s10" | "s2n" | "s3n" | "s3y" | "s4" | "s5n" | "s5y" | "s6n" | "s6y" | "s7n" | "s7y" | "s12" | "s13" | "s8n" | "s9n" | "sf1" | "sf2" | "sf3" | "sf4" | "sf5" | "sf6" | "sf9" | "sf10" | "sf11" | "sf12" | "s13n";
+export type QuestionId = "invalid-id" | "0" | "1" | "r1" | "r10" | "r11n" | "r11" | "r12" | "r2n" | "r2y" | "r3" | "r4" | "r5y" | "r6y" | "r7y" | "r8" | "r9n" | "rf3" | "rf4" | "rf5" | "rf1" | "rf2" | "s1" | "s11" | "s10" | "s2n" | "s3n" | "s3y" | "s4" | "s5n" | "s5y" | "s6n" | "s6y" | "s7n" | "s7y" | "s12" | "s13" | "s8n" | "s9n" | "sf1" | "sf2" | "sf3" | "sf4" | "sf5" | "sf6" | "sf9" | "sf10" | "sf11" | "sf12" | "s13n";
 
 /**
  * Different question types

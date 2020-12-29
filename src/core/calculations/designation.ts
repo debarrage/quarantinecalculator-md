@@ -11,6 +11,10 @@ export class Designation {
     }
 
     public find(final: IFinalQuestion) {
+        if(final.id === "rf4" || final.id === "rf3") {
+            return findDesignation("rf4");
+        }
+
         if(final.id === "sf2") {
             return findDesignation("sf2");
         }
