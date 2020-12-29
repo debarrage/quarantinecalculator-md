@@ -87,4 +87,5 @@ export const designations: Designations = [
     d("sf2").text("Meer informatie op sciensano.be"),
     d("s7y").text("Symptomen moeten verdwenen zijn voor beëindiging van quarantaine."),
     d("s10").text("Nadien moet er nog 7 dagen ten alle tijden chirurgisch mondmasker gedragen worden en alle symptomen moeten verdwenen zijn 14 dagen na begin symptomen."),
+    d("r12").text("Testen op 7 dagen. Indien de patiënt niet wil of kan getest worden quarantaine van 10 dagen, en 14 dagen verhoogde waakzaamhid."),
 ];
