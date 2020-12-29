@@ -1,0 +1,30 @@
+@import "../App/colors";
+@import "../App/fluid";
+@import "./params";
+
+.question {
+    &.question__options {
+    }
+
+    .question__body {
+        &.options {
+            width: 100%;
+            flex: 3;
+
+            display: flex;
+            flex-direction: column;
+
+            .options__question {
+                height: $button-height;
+                background-color: $question-footer-color;
+
+                height: $button-height;
+                line-height: $button-height;
+                font-size: $button-font-size;
+
+                margin: 1rem;
+                text-align: right;
+            }
+        }
+    }
+}
