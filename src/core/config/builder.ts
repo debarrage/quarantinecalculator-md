@@ -1,4 +1,5 @@
-import { IDaysAgoQuestion, IDesignation, IFinalQuestion, INextQuestion, IRelayQuestion, IYesNoQuestion, Question, QuestionId } from "../domain";
+import { INITIAL_QUESTION_ID } from ".";
+import { IDaysAgoQuestion, IDesignation, IFinalQuestion, INextQuestion, IOptionsQuestion, IRelayQuestion, IYesNoQuestion, Question, QuestionId } from "../domain";
 
 /**
  * Helper to build a question in a fluent manner.
@@ -51,6 +52,15 @@ export class QuestionBuilder {
         };
     }
 
+    options(): OptionsQuestionBuilder {
+        const {id, title} = this.question;
+        if(id && title) {
+            return new OptionsQuestionBuilder(id, title);
+        } else {
+            throw new Error("Both id and title are required");
+        }
+    }
+
     yesNo(yes: QuestionId, no: QuestionId): IYesNoQuestion {
         const { id, title } = this.question;
         if(id && title) {
@@ -73,6 +83,32 @@ export class QuestionBuilder {
             type: "relay",
             yesCondition,
         };     
+    }
+}
+
+export class OptionsQuestionBuilder {
+    private question: IOptionsQuestion = {
+        id: INITIAL_QUESTION_ID,
+        title: "",
+        type: "options",
+        targets: {}
+    };
+
+    constructor(id: QuestionId, title: string) {
+        this.question.id = id;
+        this.question.title = title;
+    }
+
+    add(question: string, id: QuestionId) {
+        if(this.question.targets) {
+            this.question.targets[question] = id;
+        }
+
+        return this;
+    }
+
+    build() {
+        return this.question;
     }
 }
 

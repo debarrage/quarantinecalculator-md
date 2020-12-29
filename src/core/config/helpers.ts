@@ -1,4 +1,5 @@
 import { designations, IDesignation, INITIAL_QUESTION_ID, INVALID_QUESTION_ID, IQuestion, isDayQuestion, isNextQuestion, isRelayQuestion, isYesNoQuestion, QuestionId, QuestionResultTypes, questions } from "..";
+import { isOptionsQuestion } from "../domain";
 
 export function isQuestionId(id: QuestionId): id is QuestionId {
     return !!questions.map(q => q.id).find(i => i === id);
@@ -28,6 +29,8 @@ export function findInitialQuestion() {
 export function findNextQuestionId(current: IQuestion, result: QuestionResultTypes) {
     if(isYesNoQuestion(current) || isRelayQuestion(current)) {
         return result ? current.targets.yes : current.targets.no;
+    } else if(isOptionsQuestion(current)) {
+        return result as QuestionId;
     } else if(current && (isNextQuestion(current) || isDayQuestion(current))) {
         return current.targets.next;
     } 

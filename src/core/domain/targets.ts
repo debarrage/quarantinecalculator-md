@@ -30,6 +30,9 @@ export interface IYesNoTarget extends ITarget {
     }
 }
 
+export interface IOptionsTarget extends ITarget {
+}
+
 export interface IFinalTarget extends Omit<ITarget, "targets"> {
     final: true;
 }

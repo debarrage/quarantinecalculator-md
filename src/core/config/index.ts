@@ -18,7 +18,13 @@ const d = (id: QuestionId): DesignationBuilder => new DesignationBuilder(id);
 export const questions: Questions= [
     // Introduction and main question
     q(INITIAL_QUESTION_ID).title("Klik op 'Volgende' om de Covid Calculator te starten").next("1"),
-    q("1").title("Is de patiënt symptomatisch? Voldoet hij aan de gevalsdefinitie?").yesNo("s1","r1"),
+    q("1").title("Welke situatie past het beste bij up patiënt?").options()
+        .add("Symptomatische patiënt", "s1")
+        .add("Rode zone", "r11")
+        .add("Hoog-risico contact", "r2y")
+        .add("Geen van voorgaande", "r2n")
+        .build(),
+    // q("1").title("Is de patiënt symptomatisch? Voldoet hij aan de gevalsdefinitie?").yesNo("s1","r1"),
     
     // Questions r-tree
     q("r1").title("Is er een hoog risico contact geweest met een bevestigd covid geval? Of komt de patiënt uit een rode zone?").yesNo("r2y", "r11n"),
@@ -33,7 +39,11 @@ export const questions: Questions= [
     q("r7y").title("Wanneer is de test gedaan?").daysAgo("rf2"),
     q("r8").title("Is het mogelijk binnenshuis quarantaine te creëeren?").yesNo("r9n", "rf3"),
     q("r9n").title("Vanaf welke datum?").daysAgo("rf3"),
+    q("r11").title("Wanneer kwam de patiënt terug uit de rode zone?").daysAgo("r12"),
+    q("r12").title("Heeft de patiënt symptomen?").yesNo("s1","rf4"),
+
     q("rf3").title("Aantal dagen quarantaine:").final(),
+    q("rf4").title("Aantal dagen quarantaine:").final(),
     
     // Final answers r-tree
     q("rf1").title("Geen quarantaine nodig").final(),
