@@ -34,7 +34,7 @@ The flows of Sciensano were abstracted in a flow consisting of the following que
 This results in a flow whith **simple** and unambiguous questions, which helps the health professional
 to get the correct result.
 
-![Flow based on Sciensano documentation](./flow-v2.jpeg)
+![Flow based on Sciensano documentation](./flow-v3.jpeg)
 
 ## Read on
 [Privacy statments](./privacy.md)

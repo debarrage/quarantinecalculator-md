@@ -1,4 +1,4 @@
-import { IDaysAgoQuestion, INextQuestion, IQuestion, IYesNoQuestion } from "./questions";
+import { IDaysAgoQuestion, INextQuestion, IOptionsQuestion, IQuestion, IYesNoQuestion } from "./questions";
 
 /**
  * Result of a question
@@ -31,9 +31,16 @@ export type NextResult = Omit<IQuestionResult<INextQuestion, void>, "value">;
 export type YesNoResult = IQuestionResult<IYesNoQuestion, boolean>;
 
 /**
+ * Result of a IOptionsquestion, it has a string result indicating the chosen target
+ * 
+ * @see IOptionsQuestion
+ */
+export type OptionsResult = IQuestionResult<IOptionsQuestion, string>;
+
+/**
  * Summary of the value types of an IQuestionResult
  */
-export type QuestionResultTypes = (YesNoResult | DaysAgoResult)["value"]
+export type QuestionResultTypes = (YesNoResult | DaysAgoResult | OptionsResult)["value"]
 
 /**
  * Summary of all possible Question Results

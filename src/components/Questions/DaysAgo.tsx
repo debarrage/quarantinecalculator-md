@@ -10,6 +10,7 @@ import "./DaysAgo.scss";
 import { useNextQuestions } from "./hooks/useNextQuestion";
 import * as Question from "./Question";
 
+
 export const DaysAgo: React.FC<QuestionProps<IDaysAgoQuestion>> = (props) => {
     
     const [result, setResult] = useState<number>(0);

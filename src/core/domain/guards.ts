@@ -1,6 +1,6 @@
 import { INextQuestion, IYesNoQuestion } from ".";
 import { IDesignation } from "./designations";
-import { IDaysAgoQuestion, IFinalQuestion, IQuestion, IRelayQuestion } from "./questions";
+import { IDaysAgoQuestion, IFinalQuestion, IOptionsQuestion, IQuestion, IRelayQuestion } from "./questions";
 import { DaysAgoResult, QuestionResult, YesNoResult } from "./results";
 import { IFinalTarget, INextTarget, ITarget, IYesNoTarget } from "./targets";
 
@@ -12,6 +12,10 @@ export function isNextQuestion(q: IQuestion): q is INextQuestion {
 
 export function isDayQuestion(q: IQuestion): q is IDaysAgoQuestion {
     return q.type === "day";
+}
+
+export function isOptionsQuestion(q: IQuestion): q is IOptionsQuestion {
+    return q.type === "options";
 }
 
 export function isYesNoQuestion(q: IQuestion): q is IYesNoQuestion {

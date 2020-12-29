@@ -37,6 +37,10 @@ export class Calculator {
             }
         }
 
+        if(id === "rf4") {
+            return this.utils.getDaysResult("r11") + 7;
+        }
+
         return -1;
     }
 
